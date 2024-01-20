@@ -1,0 +1,89 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// datasource db {
+//   provider = "postgresql"
+//   url      = env("DATABASE_URL")
+// }
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String   @unique
+  name       String
+  email      String   @unique
+  password   String
+  ongs       Ong[]
+  active     Boolean
+  image      String
+  created_at DateTime
+  updated_at DateTime
+  deleted_at DateTime
+  logins     Login[]
+}
+
+model Ong {
+  id             String     @unique
+  name           String     @unique
+  cnpj           String     @unique
+  address        String
+  neighborhood   String
+  state          String
+  number_address Int
+  cep            Int
+  created_at     DateTime
+  deleted_at     DateTime
+  updated_at     DateTime
+  active         Boolean
+  user           User       @relation(fields: [user_id], references: [id])
+  user_id        String
+  telephone      Int
+  maximum_pets   Int
+  image          String?
+  pets           Pet[]
+  Donation       Donation[]
+}
+
+model Login {
+  id         String   @unique
+  token      String
+  user       User     @relation(fields: [user_id], references: [id])
+  user_id    String
+  created_at DateTime
+  updated_at DateTime
+  deleted_at DateTime
+  active     Boolean
+  localhost  String
+}
+
+model Pet {
+  id          String  @unique
+  name        String
+  species     String
+  age         Int?
+  gender      String?
+  description String?
+  ong         Ong     @relation(fields: [ong_id], references: [id])
+  ong_id      String
+  image       String
+  created_at  String
+  updated_at  String
+  deleted_at  String
+  to_adopt    Boolean
+}
+
+model Donation {
+  id          String   @unique
+  ong         Ong      @relation(fields: [ong_id], references: [id])
+  ong_id      String
+  description String
+  created_at  DateTime
+  updated_at  DateTime
+  deleted_at  DateTime
+}
