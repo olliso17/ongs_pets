@@ -21,7 +21,7 @@ model User {
   password   String
   ongs       Ong[]
   active     Boolean
-  image      String
+  image      String? 
   created_at DateTime
   updated_at DateTime
   deleted_at DateTime
@@ -55,7 +55,7 @@ model Login {
   token      String
   user       User     @relation(fields: [user_id], references: [id])
   user_id    String
-  created_at DateTime
+  created_at DateTime @default(now())
   updated_at DateTime
   deleted_at DateTime
   active     Boolean
@@ -71,10 +71,10 @@ model Pet {
   description String?
   ong         Ong     @relation(fields: [ong_id], references: [id])
   ong_id      String
-  image       String
-  created_at  String
-  updated_at  String
-  deleted_at  String
+  image       String?
+  created_at  DateTime @default(now())
+  updated_at  DateTime
+  deleted_at  DateTime
   to_adopt    Boolean
 }
 
@@ -83,7 +83,7 @@ model Donation {
   ong         Ong      @relation(fields: [ong_id], references: [id])
   ong_id      String
   description String
-  created_at  DateTime
+  created_at  DateTime @default(now())
   updated_at  DateTime
   deleted_at  DateTime
 }
