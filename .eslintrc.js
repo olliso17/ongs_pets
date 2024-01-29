@@ -7,7 +7,8 @@ module.exports = {
   "extends": [
       "eslint:recommended",
       "plugin:@typescript-eslint/eslint-recommended",
-      "plugin:@typescript-eslint/recommended"
+      "plugin:@typescript-eslint/recommended",
+      'eslint-disable-next-line @typescript-eslint/no-var-requires'
   ],
   "rules": {
       "no-console": [

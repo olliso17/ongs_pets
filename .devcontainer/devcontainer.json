@@ -1,0 +1,24 @@
+{
+    "name": "Ongs_pets",
+    "image": "mcr.microsoft.com/devcontainers/javascript-node:dev-20-bookworm",
+    "customizations": {
+        "vscode": {
+          
+            "extensions": [
+                "ms-vscode.vscode-typescript-next",
+                "Prisma.prisma",
+                "Prisma.prisma-insider",
+                "rangav.vscode-thunder-client",
+                "Orta.vscode-jest",
+                "esbenp.prettier-vscode",
+                "kavod-io.vscode-jest-test-adapter",
+                "ms-vscode.js-debug-companion"
+            ],
+            "editor.defaultFormatter": "esbenp.prettier-vscode",
+            "editor.wordWrap":"on",
+            "editor.wordWrapColumn":60
+            
+        }
+    },
+    "postCreateCommand": "npm install"
+}
