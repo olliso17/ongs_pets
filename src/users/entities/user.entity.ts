@@ -1,10 +1,11 @@
-import { Login } from 'src/logins/entities/login.entity';
-import { Ong } from 'src/ongs/entities/ong.entity';
-import { User } from '@prisma/client';
+import { LoginEntity } from 'src/logins/entities/login.entity';
+import { OngEntity } from 'src/ongs/entities/ong.entity';
+import bcrypt from "bcryptjs";
 
 
 import uuid from 'uuid';
 import UserInterface from './user.entity.interface';
+import { regex } from 'src/utils/regexs';
 
 type UserProps = {
     name: string;
@@ -12,7 +13,8 @@ type UserProps = {
     password: string;
     updatedAt?: Date;
     deletedAt?: Date;
-    logins?: Login[] | []
+    logins?: LoginEntity[] | [];
+    ongs?: OngEntity[] | [];
 };
 
 export default class UserEntity implements UserInterface {
@@ -24,7 +26,8 @@ export default class UserEntity implements UserInterface {
     private _updatedAt: Date;
     private _deletedAt: Date;
     private _status: boolean;
-    private _logins: Login[]
+    private _logins: LoginEntity[];
+    private _ongs: OngEntity[];
 
     constructor(props: UserProps) {
         const date = new Date();
@@ -64,13 +67,54 @@ export default class UserEntity implements UserInterface {
         return this._status;
     }
     validateUser(): void {
-        throw new Error('Method not implemented.');
+        if (regex.test(this._id)) {
+            throw new Error('Id is not found.');
+        }
+        if (regex.test(this._name)) {
+            throw new Error('Name is not found.');
+        }
+        if (regex.test(this._email)) {
+            throw new Error('Email is not found.');
+        }
+        if (regex.test(this._password)) {
+            throw new Error('Password is not found.');
+        }
     }
-    addLogins(login: Login ) {
+    addLogins(login: LoginEntity) {
         const arrayLogin = Array()
         arrayLogin.push(login);
         this._logins = arrayLogin;
         return this._logins;
+    }
+    addOngs(ong: OngEntity) {
+        const arrayOng = Array()
+        arrayOng.push(ong);
+        this._ongs = arrayOng;
+        return this._ongs;
+    }
+    encryptUsername() {
+        const salt = bcrypt.genSaltSync();
+        this._name = bcrypt.hashSync(this._name, salt);
+    }
+
+    verifyUsername(name: string): boolean {
+        return bcrypt.compareSync(name, this._name);
+    }
+
+    encryptEmail() {
+        const salt = bcrypt.genSaltSync();
+        this._email = bcrypt.hashSync(this._email, salt);
+    }
+    verifyEmail(email: string): boolean {
+        return bcrypt.compareSync(email, this._email);
+    }
+    encryptPassword() {
+        const salt = bcrypt.genSaltSync();
+        this._password = bcrypt.hashSync(this._password, salt);
+    }
+
+    verifyPassword(password: string): boolean {
+        return bcrypt.compareSync(password, this._password);
     }
 
 }

@@ -1,4 +1,4 @@
-export class Ong {
+export class OngEntity {
     id:string;
 	name:string;
 	cnpj:string;

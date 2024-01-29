@@ -1,4 +1,4 @@
-export class Login {
+export class LoginEntity {
     id:string;
     token:string;
     user_id:string;
