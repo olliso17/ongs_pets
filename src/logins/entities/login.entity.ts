@@ -1,6 +1,6 @@
-import BaseEntity, { BaseEntityProps } from "src/base/base.entity";
+import BaseEntity, { BaseEntityProps } from "../../base/base.entity";
 import LoginEntityInterface from "./login.entity.interface";
-import StringNotNullAndBlankSpace from "src/util/verify.regex";
+import StringNotNullAndBlankSpace from "../../util/verify.regex";
 
 type LoginProps = BaseEntityProps & {
   token: string;
@@ -18,6 +18,7 @@ export class LoginEntity extends BaseEntity implements LoginEntityInterface {
     this._token = props.token;
     this._user_id = props.user_id;
     this._localhost = props.localhost;
+    this.validationLogin();
   }
   get token(): string {
     return this._token;
@@ -33,11 +34,11 @@ export class LoginEntity extends BaseEntity implements LoginEntityInterface {
     if (StringNotNullAndBlankSpace.test(this._token) === false) {
       throw new Error("Token is required.");
     }
-    if (StringNotNullAndBlankSpace.test(this.user_id) === false) {
-      throw new Error("User id is required.");
-    }
     if (StringNotNullAndBlankSpace.test(this._localhost) === false) {
       throw new Error("Localhost is required.");
+    }
+    if (StringNotNullAndBlankSpace.test(this.user_id) === false) {
+      throw new Error("User id is required.");
     }
   }
 }

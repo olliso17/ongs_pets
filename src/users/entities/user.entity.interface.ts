@@ -7,7 +7,6 @@ export default interface UserEntityInterface {
   get password(): string;
   addLogins(login: LoginEntity): LoginEntity[];
   addOngs(ong: OngEntity): OngEntity[];
-  validateUser(): void;
   encryptUsername(name: string): string;
   verifyUsername(name: string): boolean;
   encryptEmail(email: string): string;

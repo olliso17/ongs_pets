@@ -43,11 +43,6 @@ export default class UserEntity
     return this._password;
   }
 
-  validateUser(): void {
-    if (StringNotNullAndBlankSpace.test(this._password) === false) {
-      throw new Error("Password is required.");
-    }
-  }
   addLogins(login: LoginEntity) {
     const arrayLogin = [];
     arrayLogin.push(login);
