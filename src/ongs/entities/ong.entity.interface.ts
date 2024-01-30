@@ -1,3 +1,5 @@
+import { PetEntity } from "src/pets/entities/pet.entity";
+
 export default interface OngEntityInterface {
   get name(): string;
   get cnpj(): string;
@@ -11,4 +13,5 @@ export default interface OngEntityInterface {
   get maximum_pets(): number;
   get image(): string;
   validationOng();
+  addPets(pet: PetEntity): PetEntity[];
 }

@@ -6,6 +6,7 @@ import {
   StringNotNullAndBlankSpace,
   ValidateCep,
 } from "../../util/verify.regex";
+import { PetEntity } from "src/pets/entities/pet.entity";
 
 type OngProps = BaseEntityProps & {
   name: string;
@@ -19,6 +20,7 @@ type OngProps = BaseEntityProps & {
   telephone: string;
   maximum_pets?: number | 0;
   image?: string | "";
+  pets?: PetEntity[] | [];
 };
 
 export class OngEntity extends BaseEntity implements OngEntityInterface {
@@ -33,6 +35,7 @@ export class OngEntity extends BaseEntity implements OngEntityInterface {
   private _telephone: string;
   private _maximum_pets: number;
   private _image: string;
+  private _pets: PetEntity[];
 
   constructor(props: OngProps) {
     super(props);
@@ -48,6 +51,12 @@ export class OngEntity extends BaseEntity implements OngEntityInterface {
     this._maximum_pets = props.maximum_pets;
     this._image = props.image;
     this.validationOng();
+  }
+  addPets(pet: PetEntity): PetEntity[] {
+    const arrayPets = [];
+    arrayPets.push(pet);
+    this._pets = arrayPets;
+    return this._pets;
   }
 
   get name(): string {
