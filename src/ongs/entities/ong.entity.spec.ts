@@ -1,6 +1,6 @@
 import { OngEntity } from "./ong.entity";
 
-describe("UserEntity", () => {
+describe("OngEntity", () => {
   it("should throw error when name is empty", () => {
     expect(() => {
       new OngEntity({

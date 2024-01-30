@@ -1,7 +1,7 @@
 import { randomUUID } from "crypto";
 import { PetEntity } from "./pet.entity";
 
-describe("LoginEntity", () => {
+describe("PetEntity", () => {
   it("should throw error when name is empty", () => {
     expect(() => {
       new PetEntity({

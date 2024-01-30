@@ -7,7 +7,10 @@ type DonationProps = BaseEntityProps & {
   description?: string;
 };
 
-export class Donation extends BaseEntity implements DonationEntityInterface {
+export class DonationEntity
+  extends BaseEntity
+  implements DonationEntityInterface
+{
   private _ong_id: string;
   private _description: string;
 
@@ -15,6 +18,7 @@ export class Donation extends BaseEntity implements DonationEntityInterface {
     super(props);
     this._ong_id = props.ong_id;
     this._description = props.description;
+    this.validationDonation();
   }
   get ong_id(): string {
     return this._ong_id;
