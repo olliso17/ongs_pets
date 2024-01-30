@@ -18,7 +18,7 @@ type OngProps = BaseEntityProps & {
   user_id: string;
   telephone: string;
   maximum_pets?: number | 0;
-  image?: string | null;
+  image?: string | "";
 };
 
 export class OngEntity extends BaseEntity implements OngEntityInterface {
