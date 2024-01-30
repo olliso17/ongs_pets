@@ -87,9 +87,6 @@ export class OngEntity extends BaseEntity implements OngEntityInterface {
     if (StringNotNullAndBlankSpace.test(this._user_id) === false) {
       throw new Error("User id is required.");
     }
-    if (CnpjValidate.test(this._cnpj) === false) {
-      throw new Error("Cnpj is required.");
-    }
     if (StringNotNullAndBlankSpace.test(this._name) === false) {
       throw new Error("Name is required.");
     }
@@ -102,7 +99,7 @@ export class OngEntity extends BaseEntity implements OngEntityInterface {
     if (StringNotNullAndBlankSpace.test(this._state) === false) {
       throw new Error("State is required.");
     }
-    if (NumberRegex.test(this._number_address.toString()) === false) {
+    if (NumberRegex.test(this._number_address) === false) {
       throw new Error("Required type number in number address.");
     }
     if (NumberRegex.test(this._maximum_pets.toString()) === false) {
@@ -113,6 +110,9 @@ export class OngEntity extends BaseEntity implements OngEntityInterface {
     }
     if (StringNotNullAndBlankSpace.test(this._telephone) === false) {
       throw new Error("Telephone is required.");
+    }
+    if (CnpjValidate.test(this._cnpj) === false) {
+      throw new Error("Cnpj is not valid.");
     }
   }
 }
