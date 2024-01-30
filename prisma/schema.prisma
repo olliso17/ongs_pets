@@ -35,15 +35,15 @@ model Ong {
   address        String
   neighborhood   String
   state          String
-  number_address Int
-  cep            Int
+  number_address String
+  cep            String
   created_at     DateTime
   deleted_at     DateTime
   updated_at     DateTime
   active         Boolean
   user           User       @relation(fields: [user_id], references: [id])
   user_id        String
-  telephone      Int
+  telephone      String
   maximum_pets   Int
   image          String?
   pets           Pet[]

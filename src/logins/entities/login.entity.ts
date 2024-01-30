@@ -1,6 +1,6 @@
 import BaseEntity, { BaseEntityProps } from "../../base/base.entity";
 import LoginEntityInterface from "./login.entity.interface";
-import StringNotNullAndBlankSpace from "../../util/verify.regex";
+import {StringNotNullAndBlankSpace} from "../../util/verify.regex";
 
 type LoginProps = BaseEntityProps & {
   token: string;

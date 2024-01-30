@@ -1,7 +1,7 @@
 import { LoginEntity } from "src/logins/entities/login.entity";
 import { OngEntity } from "src/ongs/entities/ong.entity";
 import UserEntityInterface from "./user.entity.interface";
-import StringNotNullAndBlankSpace from "../../util/verify.regex";
+import {StringNotNullAndBlankSpace} from "../../util/verify.regex";
 import BaseEntity, { BaseEntityProps } from "../../base/base.entity";
 
 const bcrypt = require("bcryptjs");
