@@ -22,7 +22,7 @@ describe("UserEntity", () => {
   it("should throw error when username is blank", () => {
     expect(() => {
       new UserEntity({
-        name: "",
+        name: " ",
         email: "ollitestando@gmail.com",
         password: "123456789",
       });
@@ -48,6 +48,16 @@ describe("UserEntity", () => {
     }).toThrowError("Email is required");
   });
 
+  it("should throw error when email is blank", () => {
+    expect(() => {
+      new UserEntity({
+        name: "rafael",
+        email: "  ",
+        password: "123456789",
+      });
+    }).toThrowError("Email is required");
+  });
+
   it("should throw error when password is empty", () => {
     expect(() => {
       new UserEntity({
@@ -68,14 +78,23 @@ describe("UserEntity", () => {
     }).toThrowError("Password is required");
   });
 
-  // it("should throw error when password must be at least 4", () => {
-  //   expect(() => {
-  //     new UserEntity({
-  //       name: "rafael",
-  //       email: "ollitestando@gmail.com",
-  //       password: "1234",
-  //     });
-  //   }).toThrowError("Password must be at least 4 characters long.");
-  // });
+  it("should throw error when password is null", () => {
+    expect(() => {
+      new UserEntity({
+        name: "rafael",
+        email: "ollitestando@gmail.com",
+        password: " ",
+      });
+    }).toThrowError("Password is required");
+  });
 
+  it("should throw error when password must be at least 4", () => {
+    expect(() => {
+      new UserEntity({
+        name: "rafael",
+        email: "ollitestando@gmail.com",
+        password: "1234",
+      });
+    }).toThrowError("Password must be at least 4 characters long.");
+  });
 });

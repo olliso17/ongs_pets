@@ -1,14 +1,13 @@
-import BaseEntity from "src/base/base.entity";
+import BaseEntity, { BaseEntityProps } from "../../base/base.entity";
 import OngEntityInterface from "./ong.entity.interface";
 import {
+  CnpjValidate,
   NumberRegex,
   StringNotNullAndBlankSpace,
-  TelephoneInternational,
-  TelephoneRegexBrasil,
   ValidateCep,
 } from "../../util/verify.regex";
 
-type OngProps = BaseEntity & {
+type OngProps = BaseEntityProps & {
   name: string;
   cnpj: string;
   address: string;
@@ -48,6 +47,7 @@ export class OngEntity extends BaseEntity implements OngEntityInterface {
     this._telephone = props.telephone;
     this._maximum_pets = props.maximum_pets;
     this._image = props.image;
+    this.validationOng();
   }
 
   get name(): string {
@@ -87,7 +87,7 @@ export class OngEntity extends BaseEntity implements OngEntityInterface {
     if (StringNotNullAndBlankSpace.test(this._user_id) === false) {
       throw new Error("User id is required.");
     }
-    if (StringNotNullAndBlankSpace.test(this._cnpj) === false) {
+    if (CnpjValidate.test(this._cnpj) === false) {
       throw new Error("Cnpj is required.");
     }
     if (StringNotNullAndBlankSpace.test(this._name) === false) {

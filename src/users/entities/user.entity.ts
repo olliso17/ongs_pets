@@ -84,9 +84,9 @@ export default class UserEntity
     if (StringNotNullAndBlankSpace.test(password) === false) {
       throw new Error("Password is required.");
     }
-    // if(MinCountCaractersPassword.test(password) === false) {
-    //   throw new Error("Password must be at least 4 characters long.");
-    // }
+    if(MinCountCaractersPassword.test(password)) {
+      throw new Error("Password must be at least 4 characters long.");
+    }
     const salt = bcrypt.genSaltSync(10);
     password = bcrypt.hashSync(password, salt);
     return password;
