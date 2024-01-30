@@ -1,7 +1,7 @@
 import { LoginEntity } from "src/logins/entities/login.entity";
 import { OngEntity } from "src/ongs/entities/ong.entity";
 import UserEntityInterface from "./user.entity.interface";
-import {StringNotNullAndBlankSpace} from "../../util/verify.regex";
+import { MinCountCaractersPassword, StringNotNullAndBlankSpace } from "../../util/verify.regex";
 import BaseEntity, { BaseEntityProps } from "../../base/base.entity";
 
 const bcrypt = require("bcryptjs");
@@ -32,6 +32,7 @@ export default class UserEntity
     this._password = this.encryptPassword(props.password);
     this._logins = props.logins;
   }
+ 
 
   get name(): string {
     return this._name;
@@ -83,6 +84,9 @@ export default class UserEntity
     if (StringNotNullAndBlankSpace.test(password) === false) {
       throw new Error("Password is required.");
     }
+    // if(MinCountCaractersPassword.test(password) === false) {
+    //   throw new Error("Password must be at least 4 characters long.");
+    // }
     const salt = bcrypt.genSaltSync(10);
     password = bcrypt.hashSync(password, salt);
     return password;
