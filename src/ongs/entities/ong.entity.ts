@@ -180,19 +180,17 @@ export class Ong extends BaseEntity {
     if (StringNotNullAndBlankSpace.test(this.number_address) === false) {
       throw new Error("Required type number in number address.");
     }
-    if (
-      StringNotNullAndBlankSpace.test(this.maximum_pets.toString()) === false
-    ) {
-      throw new Error("Required type number in maximum pets.");
-    }
-    if (ValidateCep.test(this.cep) === false) {
-      throw new Error("Cep is not validate.");
-    }
+    // if (NumberRegex.test(this.maximum_pets.toString()) === false) {
+    //   throw new Error("Required type number in maximum pets.");
+    // }
+    // if (ValidateCep.test(this.cep) === false) {
+    //   throw new Error("Cep is not validate.");
+    // }
     if (StringNotNullAndBlankSpace.test(this.telephone) === false) {
       throw new Error("Telephone is required.");
     }
-    if (CnpjValidate.test(this.cnpj) === false) {
-      throw new Error("Cnpj is not valid.");
-    }
+    // if (CnpjValidate.test(this.cnpj) === false) {
+    //   throw new Error("Cnpj is not valid.");
+    // }
   }
 }

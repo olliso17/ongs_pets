@@ -39,10 +39,11 @@ export default class User extends BaseEntity {
 
   constructor(props: UserProps) {
     super();
-    this.email = this.encryptEmail(props.email);
-    this.password = this.encryptPassword(props.password);
-    this.name = this.encryptUserName(props.name);
+
     Object.assign(this, props);
+    // this.email = this.encryptEmail(props.email);
+    // this.password = this.encryptPassword(props.password);
+    // this.name = this.encryptUserName(props.name);
   }
   // @Column({ type: 'varchar', length: 300 })
   // private _name: string;
@@ -100,7 +101,7 @@ export default class User extends BaseEntity {
       throw new Error("Name is required.");
     }
     const salt = bcrypt.genSaltSync(10);
-    name = bcrypt.hashSync(name, salt);
+    bcrypt.hashSync(name, salt);
     return name;
   }
 
@@ -113,8 +114,8 @@ export default class User extends BaseEntity {
       throw new Error("Email is required.");
     }
     const salt = bcrypt.genSaltSync(10);
-    email = bcrypt.hashSync(email, salt);
-    return email;
+    this.email = bcrypt.hashSync(email, salt);
+    return this.email;
   }
   verifyEmail(email: string): boolean {
     return bcrypt.compareSync(email, this.email);
@@ -127,8 +128,8 @@ export default class User extends BaseEntity {
       throw new Error("Password must be at least 4 characters long.");
     }
     const salt = bcrypt.genSaltSync(10);
-    password = bcrypt.hashSync(password, salt);
-    return password;
+    this.password = bcrypt.hashSync(password, salt);
+    return this.password;
   }
 
   verifyPassword(password: string): boolean {
