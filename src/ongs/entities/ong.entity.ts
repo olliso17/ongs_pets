@@ -6,8 +6,9 @@ import {
   StringNotNullAndBlankSpace,
   ValidateCep,
 } from "../../util/verify.regex";
-import { PetEntity } from "src/pets/entities/pet.entity";
+import { PetEntity } from "../../pets/entities/pet.entity";
 import { Column, Entity, OneToMany } from "typeorm";
+import { DonationEntity } from "src/donations/entities/donation.entity";
 
 type OngProps = {
   name: string;
@@ -25,46 +26,50 @@ type OngProps = {
 };
 @Entity()
 export class Ong extends BaseEntity {
-  @Column({ type: 'varchar', length: 300 })
-    name: string;
+  @Column({ type: "varchar", length: 300 })
+  name: string;
 
-  @Column({ type: 'varchar', length: 12 })
-    cnpj: string;
+  @Column({ type: "varchar", length: 12 })
+  cnpj: string;
 
-  @Column({ type: 'varchar', length: 300 })
-    address: string;
+  @Column({ type: "varchar", length: 300 })
+  address: string;
 
-  @Column({ type: 'varchar', length: 50 })
-    neighborhood: string;
+  @Column({ type: "varchar", length: 50 })
+  neighborhood: string;
 
-  @Column({ type: 'varchar', length: 50 })
-    state: string;
+  @Column({ type: "varchar", length: 50 })
+  state: string;
 
-  @Column({ type: 'varchar', length: 10 })
-    number_address: string;
+  @Column({ type: "varchar", length: 10 })
+  number_address: string;
 
-  @Column({ type: 'varchar', length: 15 })
-    cep: string;
+  @Column({ type: "varchar", length: 15 })
+  cep: string;
 
-  @Column({ type: 'varchar', length: 300 })
-    user_id: string;
+  @Column({ type: "varchar", length: 300 })
+  user_id: string;
 
-  @Column({ type: 'varchar', length: 300 })
-    telephone: string;
+  @Column({ type: "varchar", length: 300 })
+  telephone: string;
 
-  @Column({ type: 'integer', default:0})
-    maximum_pets: number;
+  @Column({ type: "integer", default: 0 })
+  maximum_pets: number;
 
-  @Column({ type: 'varchar', length: 300,  default:""})
-    image: string;
-  
-  @OneToMany(() => PetEntity, (pet) => pet.ong_id)
-    pets: PetEntity[];
+  @Column({ type: "varchar", length: 300, default: "" })
+  image: string;
 
-    constructor(props: OngProps) {
-      super();
-      Object.assign(this, props);
-    }
+  @OneToMany(() => PetEntity, pet => pet.ong_id)
+  pets: PetEntity[];
+
+  @OneToMany(() => DonationEntity, donation => donation.ong_id)
+  donations: DonationEntity[];
+
+  constructor(props: OngProps) {
+    super();
+    Object.assign(this, props);
+    this.validationOng();
+  }
   // @Column({ type: 'varchar', length: 300 })
   // private _name: string;
 
@@ -97,7 +102,7 @@ export class Ong extends BaseEntity {
 
   // @Column({ type: 'varchar', length: 300,  default:""})
   // private _image: string;
-  
+
   // @OneToMany(() => PetEntity, (pet) => pet.ong_id)
   // private _pets: PetEntity[];
 
@@ -116,12 +121,12 @@ export class Ong extends BaseEntity {
   //   this._image = props.image;
   //   this.validationOng();
   // }
-  // addPets(pet: PetEntity): PetEntity[] {
-  //   const arrayPets = [];
-  //   arrayPets.push(pet);
-  //   this._pets = arrayPets;
-  //   return this._pets;
-  // }
+  addPets(pet: PetEntity): PetEntity[] {
+    const arrayPets = [];
+    arrayPets.push(pet);
+    this.pets = arrayPets;
+    return this.pets;
+  }
 
   // get name(): string {
   //   return this._name;
@@ -156,36 +161,38 @@ export class Ong extends BaseEntity {
   // get image(): string {
   //   return this._image;
   // }
-  // validationOng() {
-  //   if (StringNotNullAndBlankSpace.test(this._user_id) === false) {
-  //     throw new Error("User id is required.");
-  //   }
-  //   if (StringNotNullAndBlankSpace.test(this._name) === false) {
-  //     throw new Error("Name is required.");
-  //   }
-  //   if (StringNotNullAndBlankSpace.test(this._address) === false) {
-  //     throw new Error("Address is required.");
-  //   }
-  //   if (StringNotNullAndBlankSpace.test(this._neighborhood) === false) {
-  //     throw new Error("Neighborhood is required.");
-  //   }
-  //   if (StringNotNullAndBlankSpace.test(this._state) === false) {
-  //     throw new Error("State is required.");
-  //   }
-  //   if (NumberRegex.test(this._number_address) === false) {
-  //     throw new Error("Required type number in number address.");
-  //   }
-  //   if (NumberRegex.test(this._maximum_pets.toString()) === false) {
-  //     throw new Error("Required type number in maximum pets.");
-  //   }
-  //   if (ValidateCep.test(this._cep) === false) {
-  //     throw new Error("Cep is not validate.");
-  //   }
-  //   if (StringNotNullAndBlankSpace.test(this._telephone) === false) {
-  //     throw new Error("Telephone is required.");
-  //   }
-  //   if (CnpjValidate.test(this._cnpj) === false) {
-  //     throw new Error("Cnpj is not valid.");
-  //   }
-  // }
+  validationOng() {
+    if (StringNotNullAndBlankSpace.test(this.user_id) === false) {
+      throw new Error("User id is required.");
+    }
+    if (StringNotNullAndBlankSpace.test(this.name) === false) {
+      throw new Error("Name is required.");
+    }
+    if (StringNotNullAndBlankSpace.test(this.address) === false) {
+      throw new Error("Address is required.");
+    }
+    if (StringNotNullAndBlankSpace.test(this.neighborhood) === false) {
+      throw new Error("Neighborhood is required.");
+    }
+    if (StringNotNullAndBlankSpace.test(this.state) === false) {
+      throw new Error("State is required.");
+    }
+    if (StringNotNullAndBlankSpace.test(this.number_address) === false) {
+      throw new Error("Required type number in number address.");
+    }
+    if (
+      StringNotNullAndBlankSpace.test(this.maximum_pets.toString()) === false
+    ) {
+      throw new Error("Required type number in maximum pets.");
+    }
+    if (ValidateCep.test(this.cep) === false) {
+      throw new Error("Cep is not validate.");
+    }
+    if (StringNotNullAndBlankSpace.test(this.telephone) === false) {
+      throw new Error("Telephone is required.");
+    }
+    if (CnpjValidate.test(this.cnpj) === false) {
+      throw new Error("Cnpj is not valid.");
+    }
+  }
 }

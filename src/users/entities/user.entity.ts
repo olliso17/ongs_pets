@@ -1,49 +1,50 @@
-import { Login } from "src/logins/entities/login.entity";
-import { Ong } from "src/ongs/entities/ong.entity";
+import { Login } from "../../logins/entities/login.entity";
+import { Ong } from "../../ongs/entities/ong.entity";
 import UserInterface from "./user.entity.interface";
-import { MinCountCaractersPassword, StringNotNullAndBlankSpace } from "../../util/verify.regex";
+import {
+  MinCountCaractersPassword,
+  StringNotNullAndBlankSpace,
+} from "../../util/verify.regex";
 import BaseEntity from "../../base/base.entity";
 import { Column, Entity, OneToMany } from "typeorm";
 
 const bcrypt = require("bcryptjs");
-type UserProps =  {
+type UserProps = {
   name: string;
   email: string;
   password: string;
   logins?: Login[] | [];
   ongs?: Ong[] | [];
-  image?:string | "";
+  image?: string | "";
 };
-@Entity({ name: 'user' })
-export default class User
-  extends BaseEntity
-{
+@Entity({ name: "user" })
+export default class User extends BaseEntity {
+  @Column({ type: "varchar", length: 300 })
+  name: string;
 
+  @Column({ type: "varchar", length: 300 })
+  email: string;
 
-  @Column({ type: 'varchar', length: 300 })
-    name: string;
+  @Column({ type: "varchar", length: 300 })
+  password: string;
 
-  @Column({ type: 'varchar', length: 300 })
-    email: string;
+  @OneToMany(() => Login, login => login.user_id)
+  logins: Login[];
 
-  @Column({ type: 'varchar', length: 300 })
-    password: string;
+  @OneToMany(() => Ong, ong => ong.user_id)
+  ongs: Ong[];
 
-  @OneToMany(() => Login, (login) => login.user_id)
-    logins: Login[];
+  @Column({ type: "varchar", length: 300 })
+  image: string;
 
-  @OneToMany(() => Ong, (ong) => ong.user_id)
-    ongs: Ong[];
-
-  @Column({ type: 'varchar', length: 300 })
-    image:string;
-    
-    
-    constructor(props: UserProps) {
-      super();
-      Object.assign(this, props);
-    }
-    // @Column({ type: 'varchar', length: 300 })
+  constructor(props: UserProps) {
+    super();
+    this.email = this.encryptEmail(props.email);
+    this.password = this.encryptPassword(props.password);
+    this.name = this.encryptUserName(props.name);
+    Object.assign(this, props);
+  }
+  // @Column({ type: 'varchar', length: 300 })
   // private _name: string;
 
   // @Column({ type: 'varchar', length: 300 })
@@ -69,7 +70,7 @@ export default class User
   //   this._logins = props.logins;
   //   this._image = props.image;
   // }
- 
+
   // get name(): string {
   //   return this._name;
   // }
@@ -94,7 +95,7 @@ export default class User
   //   this._ongs = arrayOng;
   //   return this._ongs;
   // }
-  encryptUsername(name: string): string {
+  encryptUserName(name: string): string {
     if (StringNotNullAndBlankSpace.test(name) === false) {
       throw new Error("Name is required.");
     }
@@ -122,7 +123,7 @@ export default class User
     if (StringNotNullAndBlankSpace.test(password) === false) {
       throw new Error("Password is required.");
     }
-    if(MinCountCaractersPassword.test(password)) {
+    if (MinCountCaractersPassword.test(password)) {
       throw new Error("Password must be at least 4 characters long.");
     }
     const salt = bcrypt.genSaltSync(10);

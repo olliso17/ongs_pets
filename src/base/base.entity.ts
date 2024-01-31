@@ -1,22 +1,21 @@
+import { randomUUID } from "crypto";
 import BaseEntityInterface from "./base.entity.inteface";
 import { Column, CreateDateColumn, PrimaryGeneratedColumn } from "typeorm";
 
+export default class BaseEntity {
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
+  @Column({ type: "boolean", default: true })
+  active: boolean;
 
-export default class BaseEntity{
-  @PrimaryGeneratedColumn('uuid')
-    id: string;
+  @CreateDateColumn({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP" })
+  created_at: Date;
 
-  @Column({ type: 'boolean', default: true })
-    active: boolean;
+  @CreateDateColumn({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP" })
+  updated_at: Date;
 
-  @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
-    created_at: Date;
-
-  @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
-    updated_at: Date;
-  
-  @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
+  @CreateDateColumn({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP" })
   // @PrimaryGeneratedColumn('uuid')
   // private _id: string;
 
@@ -30,23 +29,29 @@ export default class BaseEntity{
   // private _updated_at: Date;
   // @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
   // private _deleted_at: Date;
-  @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
-    deleted_at: Date;
+  @CreateDateColumn({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP" })
+  deleted_at: Date;
 
-  // activate(date: Date): void {
-  //   this.active = true;
-  //   this.updated_at = date;
-  // }
+  activate(date: Date): void {
+    this.active = true;
+    this.updated_at = date;
+  }
 
-  // deactivate(date: Date): void {
-  //   this.active = false;
-  //   this.deleted_at = date;
-  // }
+  deactivate(date: Date): void {
+    this.active = false;
+    this.deleted_at = date;
+  }
 
-  // update(date: Date): void {
-  //   this.updated_at = date;
-  // }
-
+  update(date: Date): void {
+    this.updated_at = date;
+  }
+  constructor() {
+    this.id = randomUUID();
+    this.active = true;
+    this.created_at = new Date();
+    this.updated_at = new Date();
+    this.deleted_at = new Date();
+  }
   // get id(): string {
   //   return this._id;
   // }

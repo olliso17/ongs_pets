@@ -8,41 +8,42 @@ type PetProps = {
   species: string;
   age: number;
   gender: string;
-  description?: string|"";
+  description?: string | "";
   ong_id: string;
   image?: string | "";
 };
 @Entity()
 export class PetEntity extends BaseEntity {
-  @Column({ type: 'varchar', length: 300 })
-    name: string;
+  @Column({ type: "varchar", length: 300 })
+  name: string;
 
-  @Column({ type: 'varchar', length: 300 })
-    species: string;
+  @Column({ type: "varchar", length: 300 })
+  species: string;
 
-  @Column({ type: 'integer', default:0 })
-    age: number;
+  @Column({ type: "integer", default: 0 })
+  age: number;
 
-  @Column({ type: 'varchar', length: 300 })
-    gender: string;
+  @Column({ type: "varchar", length: 300 })
+  gender: string;
 
-  @Column({ type: 'varchar', length: 300, default:"" })
-    description: string;
+  @Column({ type: "varchar", length: 300, default: "" })
+  description: string;
 
-  @Column({ type: 'varchar', length: 300 })
-    ong_id: string;
+  @Column({ type: "varchar", length: 300 })
+  ong_id: string;
 
-  @Column({ type: 'varchar', length: 300, default:"" })
-    image: string;
+  @Column({ type: "varchar", length: 300, default: "" })
+  image: string;
 
-  @Column({ type: 'boolean', default: false })
-    to_adopt: boolean;
+  @Column({ type: "boolean", default: false })
+  to_adopt: boolean;
 
-
-    constructor(props: PetProps) {
-      super();
-      Object.assign(this, props);
-    }
+  constructor(props: PetProps) {
+    super();
+    Object.assign(this, props);
+    this.validationPet();
+    this.isAdopted();
+  }
   // @Column({ type: 'varchar', length: 300 })
   // private _name: string;
 
@@ -78,16 +79,11 @@ export class PetEntity extends BaseEntity {
   //   this._image = props.image;
   //   this.validationPet();
   // }
-  // isAdopted(adopt: boolean): boolean {
-  //   if (adopt === this._to_adopt) {
-  //     throw new Error("value already exists of the adoption status.");
-  //   }
-  //   if (adopt !== this._to_adopt) {
-  //     this.update(new Date());
-  //     this._to_adopt = adopt;
-  //     return this._to_adopt;
-  //   }
-  // }
+  isAdopted(): boolean {
+    this.update(new Date());
+    this.to_adopt = !this.to_adopt;
+    return this.to_adopt;
+  }
   // get name(): string {
   //   return this._name;
   // }
@@ -113,15 +109,15 @@ export class PetEntity extends BaseEntity {
   //   return this._to_adopt;
   // }
 
-  // validationPet(): void {
-  //   if (StringNotNullAndBlankSpace.test(this._ong_id) === false) {
-  //     throw new Error("Ong id is required.");
-  //   }
-  //   if (StringNotNullAndBlankSpace.test(this._name) === false) {
-  //     throw new Error("Name is required.");
-  //   }
-  //   if (StringNotNullAndBlankSpace.test(this._species) === false) {
-  //     throw new Error("Species is required.");
-  //   }
-  // }
+  validationPet(): void {
+    if (StringNotNullAndBlankSpace.test(this.ong_id) === false) {
+      throw new Error("Ong id is required.");
+    }
+    if (StringNotNullAndBlankSpace.test(this.name) === false) {
+      throw new Error("Name is required.");
+    }
+    if (StringNotNullAndBlankSpace.test(this.species) === false) {
+      throw new Error("Species is required.");
+    }
+  }
 }

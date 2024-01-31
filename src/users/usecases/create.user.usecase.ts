@@ -11,6 +11,7 @@ export default class CreateUserUsecase {
   ) {}
   async execute(createUserDto: CreateUserInputDto ){
     const user = new User(createUserDto);
+    
     await this.userRepository.create(user);
     return user;
   }

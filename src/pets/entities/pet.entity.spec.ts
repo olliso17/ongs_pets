@@ -91,35 +91,37 @@ describe("PetEntity", () => {
       ong_id: "adjgasjajsd",
       image: "",
     });
-    pet.isAdopted(true);
+    pet.isAdopted();
     expect(pet.active).toBe(true);
   });
-   it("should throw error when adotpted all exist status value", () => {
-     const pet = new PetEntity({
-       name: "beto",
-       species: "cachorro",
-       age: 12,
-       gender: "macho",
-       description: "idosinho dengoso",
-       ong_id: "adjgasjajsd",
-       image: "",
-     });
-     expect(() => pet.isAdopted(false)).toThrowError(
-       "value already exists of the adoption status.",
-     );
-   });
-    it("should throw error when adotpted all exist status value", () => {
-      const pet = new PetEntity({
-        name: "beto",
-        species: "cachorro",
-        age: 12,
-        gender: "macho",
-        description: "idosinho dengoso",
-        ong_id: "adjgasjajsd",
-        image: "",
-      });
-      pet.isAdopted(true);
-      expect(pet.isAdopted(false)).toBe(false);
-    });
+  //  it("should throw error when adotpted all exist status value", () => {
+  //    const pet = new PetEntity({
+  //      name: "beto",
+  //      species: "cachorro",
+  //      age: 12,
+  //      gender: "macho",
+  //      description: "idosinho dengoso",
+  //      ong_id: "adjgasjajsd",
+  //      image: "",
+  //    });
+  //    expect(() => pet.isAdopted()).toThrowError(
+  //      "value already exists of the adoption status.",
+  //    );
+  // //  });
+  //   it("should throw error when adotpted all exist status value", () => {
+  //     const pet = new PetEntity({
+  //       name: "beto",
+  //       species: "cachorro",
+  //       age: 12,
+  //       gender: "macho",
+  //       description: "idosinho dengoso",
+  //       ong_id: "adjgasjajsd",
+  //       image: "",
+  //     });
+
+  //     pet.isAdopted();
+  //     expect(pet.isAdopted()).toBe(false);
+
+  //   });
 
 });

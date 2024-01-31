@@ -1,17 +1,16 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { CreateUserInputDto } from './dto/create-user.dto';
 import CreateUserUsecase from './usecases/create.user.usecase';
-import { UsersService } from './users.service';
 
 @Controller('users')
 export class UsersController {
   // constructor(private readonly createUseCase: CreateUserUsecase) {}
-  constructor(private readonly createUseCase: UsersService) {}
+  constructor(private readonly createUseCase: CreateUserUsecase) {}
 
   @Post('create')
   async create(@Body() createUserDto: CreateUserInputDto) {
    
-    return await this.createUseCase.create(createUserDto);
+    return await this.createUseCase.execute(createUserDto);
   }
 
   // @Get()
