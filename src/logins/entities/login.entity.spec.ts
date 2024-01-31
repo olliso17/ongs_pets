@@ -1,10 +1,10 @@
 import { randomUUID } from "crypto";
-import { LoginEntity } from "./login.entity";
+import { Login } from "./login.entity";
 
-describe("LoginEntity", () => {
+describe("Login", () => {
   it("should throw error when token is empty", () => {
     expect(() => {
-      new LoginEntity({
+      new Login({
         token: "",
         localhost: "ollitestando@gmail.com",
         user_id: randomUUID(),
@@ -13,7 +13,7 @@ describe("LoginEntity", () => {
   });
   it("should throw error when token is blank", () => {
     expect(() => {
-      new LoginEntity({
+      new Login({
         token: "  ",
         localhost: "ollitestando@gmail.com",
         user_id: randomUUID(),
@@ -22,7 +22,7 @@ describe("LoginEntity", () => {
   });
   it("should throw error when token is null", () => {
     expect(() => {
-      new LoginEntity({
+      new Login({
         token: null,
         localhost: "ollitestando@gmail.com",
         user_id: randomUUID(),
@@ -31,7 +31,7 @@ describe("LoginEntity", () => {
   });
   it("should throw error when localhost is empty", () => {
     expect(() => {
-      new LoginEntity({
+      new Login({
         token: "rafael",
         localhost: "",
         user_id: randomUUID(),
@@ -40,7 +40,7 @@ describe("LoginEntity", () => {
   });
   it("should throw error when localhost is blank", () => {
     expect(() => {
-      new LoginEntity({
+      new Login({
         token: "rafael",
         localhost: "  ",
         user_id: randomUUID(),
@@ -49,7 +49,7 @@ describe("LoginEntity", () => {
   });
   it("should throw error when localhost is null", () => {
     expect(() => {
-      new LoginEntity({
+      new Login({
         token: "rafael",
         localhost: null,
         user_id: randomUUID(),
@@ -59,7 +59,7 @@ describe("LoginEntity", () => {
 
   it("should throw error when user_id is empty", () => {
     expect(() => {
-      new LoginEntity({
+      new Login({
         token: "rafael",
         localhost: "ollitestando@gmail.com",
         user_id: "",
@@ -68,7 +68,7 @@ describe("LoginEntity", () => {
   });
   it("should throw error when user_id is blank", () => {
     expect(() => {
-      new LoginEntity({
+      new Login({
         token: "rafael",
         localhost: "ollitestando@gmail.com",
         user_id: "  ",
@@ -77,7 +77,7 @@ describe("LoginEntity", () => {
   });
   it("should throw error when user_id is null", () => {
     expect(() => {
-      new LoginEntity({
+      new Login({
         token: "rafael",
         localhost: "ollitestando@gmail.com",
         user_id: null,

@@ -1,83 +1,127 @@
 import { StringNotNullAndBlankSpace } from "../../util/verify.regex";
-import BaseEntity, { BaseEntityProps } from "../../base/base.entity";
+import BaseEntity from "../../base/base.entity";
 import PetEntityInterface from "./pet.entity.interface";
+import { Column, Entity } from "typeorm";
 
-type PetProps = BaseEntityProps & {
+type PetProps = {
   name: string;
   species: string;
   age: number;
   gender: string;
-  description: string;
+  description?: string|"";
   ong_id: string;
   image?: string | "";
 };
+@Entity()
+export class PetEntity extends BaseEntity {
+  @Column({ type: 'varchar', length: 300 })
+    name: string;
 
-export class PetEntity extends BaseEntity implements PetEntityInterface {
-  private _name: string;
-  private _species: string;
-  private _age: number;
-  private _gender: string;
-  private _description: string;
-  private _ong_id: string;
-  private _image: string;
-  private _to_adopt: boolean;
+  @Column({ type: 'varchar', length: 300 })
+    species: string;
 
-  constructor(props: PetProps) {
-    super(props);
-    this._name = props.name;
-    this._species = props.species;
-    this._age = props.age;
-    this._gender = props.gender;
-    this._description = props.description;
-    this._ong_id = props.ong_id;
-    this._image = props.image;
-    this._to_adopt = false;
-    this.validationPet();
-  }
-  isAdopted(adopt: boolean): boolean {
-    if (adopt === this._to_adopt) {
-      throw new Error("value already exists of the adoption status.");
-    }
-    if (adopt !== this._to_adopt) {
-      this.update(new Date());
-      this._to_adopt = adopt;
-      return this._to_adopt;
-    }
-  }
-  get name(): string {
-    return this._name;
-  }
-  get species(): string {
-    return this._species;
-  }
-  get age(): number {
-    return this._age;
-  }
-  get gender(): string {
-    return this._gender;
-  }
-  get description(): string {
-    return this._description;
-  }
-  get ong_id(): string {
-    return this._ong_id;
-  }
-  get image(): string {
-    return this._image;
-  }
-  get to_adopt(): boolean {
-    return this._to_adopt;
-  }
+  @Column({ type: 'integer', default:0 })
+    age: number;
 
-  validationPet(): void {
-    if (StringNotNullAndBlankSpace.test(this._ong_id) === false) {
-      throw new Error("Ong id is required.");
+  @Column({ type: 'varchar', length: 300 })
+    gender: string;
+
+  @Column({ type: 'varchar', length: 300, default:"" })
+    description: string;
+
+  @Column({ type: 'varchar', length: 300 })
+    ong_id: string;
+
+  @Column({ type: 'varchar', length: 300, default:"" })
+    image: string;
+
+  @Column({ type: 'boolean', default: false })
+    to_adopt: boolean;
+
+
+    constructor(props: PetProps) {
+      super();
+      Object.assign(this, props);
     }
-    if (StringNotNullAndBlankSpace.test(this._name) === false) {
-      throw new Error("Name is required.");
-    }
-    if (StringNotNullAndBlankSpace.test(this._species) === false) {
-      throw new Error("Species is required.");
-    }
-  }
+  // @Column({ type: 'varchar', length: 300 })
+  // private _name: string;
+
+  // @Column({ type: 'varchar', length: 300 })
+  // private _species: string;
+
+  // @Column({ type: 'integer', default:0 })
+  // private _age: number;
+
+  // @Column({ type: 'varchar', length: 300 })
+  // private _gender: string;
+
+  // @Column({ type: 'varchar', length: 300, default:"" })
+  // private _description: string;
+
+  // @Column({ type: 'varchar', length: 300 })
+  // private _ong_id: string;
+
+  // @Column({ type: 'varchar', length: 300, default:"" })
+  // private _image: string;
+
+  // @Column({ type: 'boolean', default: false })
+  // private _to_adopt: boolean;
+
+  // constructor(props: PetProps) {
+  //   super();
+  //   this._name = props.name;
+  //   this._species = props.species;
+  //   this._age = props.age;
+  //   this._gender = props.gender;
+  //   this._description = props.description;
+  //   this._ong_id = props.ong_id;
+  //   this._image = props.image;
+  //   this.validationPet();
+  // }
+  // isAdopted(adopt: boolean): boolean {
+  //   if (adopt === this._to_adopt) {
+  //     throw new Error("value already exists of the adoption status.");
+  //   }
+  //   if (adopt !== this._to_adopt) {
+  //     this.update(new Date());
+  //     this._to_adopt = adopt;
+  //     return this._to_adopt;
+  //   }
+  // }
+  // get name(): string {
+  //   return this._name;
+  // }
+  // get species(): string {
+  //   return this._species;
+  // }
+  // get age(): number {
+  //   return this._age;
+  // }
+  // get gender(): string {
+  //   return this._gender;
+  // }
+  // get description(): string {
+  //   return this._description;
+  // }
+  // get ong_id(): string {
+  //   return this._ong_id;
+  // }
+  // get image(): string {
+  //   return this._image;
+  // }
+  // get to_adopt(): boolean {
+  //   return this._to_adopt;
+  // }
+
+  // validationPet(): void {
+  //   if (StringNotNullAndBlankSpace.test(this._ong_id) === false) {
+  //     throw new Error("Ong id is required.");
+  //   }
+  //   if (StringNotNullAndBlankSpace.test(this._name) === false) {
+  //     throw new Error("Name is required.");
+  //   }
+  //   if (StringNotNullAndBlankSpace.test(this._species) === false) {
+  //     throw new Error("Species is required.");
+  //   }
+  // }
 }

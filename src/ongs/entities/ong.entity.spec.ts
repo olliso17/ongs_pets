@@ -1,9 +1,9 @@
-import { OngEntity } from "./ong.entity";
+import { Ong } from "./ong.entity";
 
-describe("OngEntity", () => {
+describe("Ong", () => {
   it("should throw error when name is empty", () => {
     expect(() => {
-      new OngEntity({
+      new Ong({
         name: "",
         cnpj: "12.345.678/0001-90",
         address: "string;",
@@ -20,7 +20,7 @@ describe("OngEntity", () => {
   });
   it("should throw error when name is empty", () => {
     expect(() => {
-      new OngEntity({
+      new Ong({
         name: "   ",
         cnpj: "12.345.678/0001-90",
         address: "string;",
@@ -37,7 +37,7 @@ describe("OngEntity", () => {
   });
   it("should throw error when name is null", () => {
     expect(() => {
-      new OngEntity({
+      new Ong({
         name: null,
         cnpj: "12.345.678/0001-90",
         address: "string;",
@@ -54,7 +54,7 @@ describe("OngEntity", () => {
   });
   it("should throw error when address is empty", () => {
     expect(() => {
-      new OngEntity({
+      new Ong({
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "",
@@ -71,7 +71,7 @@ describe("OngEntity", () => {
   });
   it("should throw error when address is null", () => {
     expect(() => {
-      new OngEntity({
+      new Ong({
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: null,
@@ -88,7 +88,7 @@ describe("OngEntity", () => {
   });
   it("should throw error when address is blank", () => {
     expect(() => {
-      new OngEntity({
+      new Ong({
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "    ",
@@ -105,7 +105,7 @@ describe("OngEntity", () => {
   });
   it("should throw error when neighborhood is blank", () => {
     expect(() => {
-      new OngEntity({
+      new Ong({
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "taladd",
@@ -122,7 +122,7 @@ describe("OngEntity", () => {
   });
   it("should throw error when neighborhood is null", () => {
     expect(() => {
-      new OngEntity({
+      new Ong({
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "taladd",
@@ -139,7 +139,7 @@ describe("OngEntity", () => {
   });
   it("should throw error when neighborhood is empty", () => {
     expect(() => {
-      new OngEntity({
+      new Ong({
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "taladd",
@@ -156,7 +156,7 @@ describe("OngEntity", () => {
   });
   it("should throw error when state is empty", () => {
     expect(() => {
-      new OngEntity({
+      new Ong({
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "taladd",
@@ -173,7 +173,7 @@ describe("OngEntity", () => {
   });
   it("should throw error when state is null", () => {
     expect(() => {
-      new OngEntity({
+      new Ong({
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "taladd",
@@ -190,7 +190,7 @@ describe("OngEntity", () => {
   });
   it("should throw error when state is blank", () => {
     expect(() => {
-      new OngEntity({
+      new Ong({
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "taladd",
@@ -207,7 +207,7 @@ describe("OngEntity", () => {
   });
   it("should throw error when number address is blank", () => {
     expect(() => {
-      new OngEntity({
+      new Ong({
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "taladd",
@@ -224,7 +224,7 @@ describe("OngEntity", () => {
   });
   it("should throw error when number address is blank", () => {
     expect(() => {
-      new OngEntity({
+      new Ong({
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "taladd",
@@ -241,7 +241,7 @@ describe("OngEntity", () => {
   });
   it("should throw error when number address is blank", () => {
     expect(() => {
-      new OngEntity({
+      new Ong({
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "taladd",
@@ -258,7 +258,7 @@ describe("OngEntity", () => {
   });
   it("should throw error when cep not found", () => {
     expect(() => {
-      new OngEntity({
+      new Ong({
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "taladd",
@@ -275,7 +275,7 @@ describe("OngEntity", () => {
   });
   it("should throw error when user id is blank", () => {
     expect(() => {
-      new OngEntity({
+      new Ong({
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "taladd",
@@ -292,7 +292,7 @@ describe("OngEntity", () => {
   });
   it("should throw error when user id is empty", () => {
     expect(() => {
-      new OngEntity({
+      new Ong({
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "taladd",
@@ -309,7 +309,7 @@ describe("OngEntity", () => {
   });
   it("should throw error when user id is null", () => {
     expect(() => {
-      new OngEntity({
+      new Ong({
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "taladd",
@@ -326,7 +326,7 @@ describe("OngEntity", () => {
   });
   it("should throw error when cnpj is empty", () => {
     expect(() => {
-      new OngEntity({
+      new Ong({
         name: "ong pet",
         cnpj: "1234678000190",
         address: "taladd",

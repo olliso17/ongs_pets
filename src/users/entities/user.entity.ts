@@ -1,61 +1,99 @@
-import { LoginEntity } from "src/logins/entities/login.entity";
-import { OngEntity } from "src/ongs/entities/ong.entity";
-import UserEntityInterface from "./user.entity.interface";
+import { Login } from "src/logins/entities/login.entity";
+import { Ong } from "src/ongs/entities/ong.entity";
+import UserInterface from "./user.entity.interface";
 import { MinCountCaractersPassword, StringNotNullAndBlankSpace } from "../../util/verify.regex";
-import BaseEntity, { BaseEntityProps } from "../../base/base.entity";
+import BaseEntity from "../../base/base.entity";
+import { Column, Entity, OneToMany } from "typeorm";
 
 const bcrypt = require("bcryptjs");
-type UserProps = BaseEntityProps & {
+type UserProps =  {
   name: string;
   email: string;
   password: string;
-  updatedAt?: Date;
-  deletedAt?: Date;
-  logins?: LoginEntity[] | [];
-  ongs?: OngEntity[] | [];
+  logins?: Login[] | [];
+  ongs?: Ong[] | [];
+  image?:string | "";
 };
-
-export default class UserEntity
+@Entity({ name: 'user' })
+export default class User
   extends BaseEntity
-  implements UserEntityInterface
 {
-  private _name: string;
-  private _email: string;
-  private _password: string;
-  private _logins: LoginEntity[];
-  private _ongs: OngEntity[];
 
-  constructor(props: UserProps) {
-    super(props);
-    this._name = this.encryptUsername(props.name);
-    this._email = this.encryptEmail(props.email);
-    this._password = this.encryptPassword(props.password);
-    this._logins = props.logins;
-  }
+
+  @Column({ type: 'varchar', length: 300 })
+    name: string;
+
+  @Column({ type: 'varchar', length: 300 })
+    email: string;
+
+  @Column({ type: 'varchar', length: 300 })
+    password: string;
+
+  @OneToMany(() => Login, (login) => login.user_id)
+    logins: Login[];
+
+  @OneToMany(() => Ong, (ong) => ong.user_id)
+    ongs: Ong[];
+
+  @Column({ type: 'varchar', length: 300 })
+    image:string;
+    
+    
+    constructor(props: UserProps) {
+      super();
+      Object.assign(this, props);
+    }
+    // @Column({ type: 'varchar', length: 300 })
+  // private _name: string;
+
+  // @Column({ type: 'varchar', length: 300 })
+  // private _email: string;
+
+  // @Column({ type: 'varchar', length: 300 })
+  // private _password: string;
+
+  // @OneToMany(() => Login, (login) => login.user_id)
+  // private _logins: Login[];
+
+  // @OneToMany(() => Ong, (ong) => ong.user_id)
+  // private _ongs: Ong[];
+
+  // @Column({ type: 'varchar', length: 300 })
+  // private _image:string;
+
+  // constructor(props: UserProps) {
+  //   super();
+  //   this._name = this.encryptUsername(props.name);
+  //   this._email = this.encryptEmail(props.email);
+  //   this._password = this.encryptPassword(props.password);
+  //   this._logins = props.logins;
+  //   this._image = props.image;
+  // }
  
-
-  get name(): string {
-    return this._name;
-  }
-  get email(): string {
-    return this._email;
-  }
-  get password(): string {
-    return this._password;
-  }
-
-  addLogins(login: LoginEntity) {
-    const arrayLogin = [];
-    arrayLogin.push(login);
-    this._logins = arrayLogin;
-    return this._logins;
-  }
-  addOngs(ong: OngEntity) {
-    const arrayOng = [];
-    arrayOng.push(ong);
-    this._ongs = arrayOng;
-    return this._ongs;
-  }
+  // get name(): string {
+  //   return this._name;
+  // }
+  // get email(): string {
+  //   return this._email;
+  // }
+  // get password(): string {
+  //   return this._password;
+  // }
+  // get image(): string {
+  //   return this._image;
+  // }
+  // addLogins(login: Login) {
+  //   const arrayLogin = [];
+  //   arrayLogin.push(login);
+  //   this._logins = arrayLogin;
+  //   return this._logins;
+  // }
+  // addOngs(ong: Ong) {
+  //   const arrayOng = [];
+  //   arrayOng.push(ong);
+  //   this._ongs = arrayOng;
+  //   return this._ongs;
+  // }
   encryptUsername(name: string): string {
     if (StringNotNullAndBlankSpace.test(name) === false) {
       throw new Error("Name is required.");
@@ -66,7 +104,7 @@ export default class UserEntity
   }
 
   verifyUsername(name: string): boolean {
-    return bcrypt.compareSync(name, this._name);
+    return bcrypt.compareSync(name, this.name);
   }
 
   encryptEmail(email: string): string {
@@ -78,7 +116,7 @@ export default class UserEntity
     return email;
   }
   verifyEmail(email: string): boolean {
-    return bcrypt.compareSync(email, this._email);
+    return bcrypt.compareSync(email, this.email);
   }
   encryptPassword(password: string): string {
     if (StringNotNullAndBlankSpace.test(password) === false) {
@@ -93,6 +131,6 @@ export default class UserEntity
   }
 
   verifyPassword(password: string): boolean {
-    return bcrypt.compareSync(password, this._password);
+    return bcrypt.compareSync(password, this.password);
   }
 }

@@ -92,7 +92,7 @@ describe("PetEntity", () => {
       image: "",
     });
     pet.isAdopted(true);
-    expect(pet.status).toBe(true);
+    expect(pet.active).toBe(true);
   });
    it("should throw error when adotpted all exist status value", () => {
      const pet = new PetEntity({

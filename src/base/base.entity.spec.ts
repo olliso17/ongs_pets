@@ -5,12 +5,12 @@ describe("Base Entity Unit Test", () => {
     const baseEntity = new BaseEntity({});
     baseEntity.deactivate(new Date());
     baseEntity.activate(new Date());
-    expect(baseEntity.status).toBe(true);
+    expect(baseEntity.active).toBe(true);
   });
 
   it("must be able to activate an entity", () => {
     const baseEntity = new BaseEntity({});
     baseEntity.deactivate(new Date());
-    expect(baseEntity.status).toBe(false);
+    expect(baseEntity.active).toBe(false);
   });
 });

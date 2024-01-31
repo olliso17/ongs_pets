@@ -1,37 +1,32 @@
-import { randomUUID } from "crypto";
 import BaseEntityInterface from "./base.entity.inteface";
+import { Column, CreateDateColumn, PrimaryGeneratedColumn } from "typeorm";
 
-export type BaseEntityProps = {
-  id?: string;
-  status?: boolean;
-  created_at?: Date;
-  updated_at?: Date;
-  deactivated_at?: Date;
-};
+
 
 export default class BaseEntity implements BaseEntityInterface {
+  @PrimaryGeneratedColumn('uuid')
   private _id: string;
-  private _status: boolean;
-  private _created_at: Date;
-  private _updated_at: Date;
-  private _deactivated_at: Date;
 
-  constructor(props: BaseEntityProps) {
-    this._id = props.id || randomUUID();
-    this._status = props.status || true;
-    this._created_at = props.created_at || new Date();
-    this._deactivated_at = props.deactivated_at || new Date();
-    this._updated_at = props.updated_at || new Date();
-  }
+  @Column({ type: 'boolean', default: true })
+  private _active: boolean;
+
+  @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
+  private _created_at: Date;
+
+  @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
+  private _updated_at: Date;
+  
+  @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
+  private _deleted_at: Date;
 
   activate(date: Date): void {
-    this._status = true;
+    this._active = true;
     this._updated_at = date;
   }
 
   deactivate(date: Date): void {
-    this._status = false;
-    this._deactivated_at = date;
+    this._active = false;
+    this._deleted_at = date;
   }
 
   update(date: Date): void {
@@ -42,8 +37,8 @@ export default class BaseEntity implements BaseEntityInterface {
     return this._id;
   }
 
-  get status(): boolean {
-    return this._status;
+  get active(): boolean {
+    return this._active;
   }
 
   get created_at(): Date {
@@ -54,7 +49,7 @@ export default class BaseEntity implements BaseEntityInterface {
     return this._updated_at;
   }
 
-  get deactivated_at(): Date {
-    return this._deactivated_at;
+  get deleted_at(): Date {
+    return this._deleted_at;
   }
 }

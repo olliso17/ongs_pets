@@ -1,6 +1,6 @@
 import { PetEntity } from "src/pets/entities/pet.entity";
 
-export default interface OngEntityInterface {
+export default interface OngInterface {
   get name(): string;
   get cnpj(): string;
   get address(): string;

@@ -6,8 +6,6 @@
           
             "extensions": [
                 "ms-vscode.vscode-typescript-next",
-                "Prisma.prisma",
-                "Prisma.prisma-insider",
                 "rangav.vscode-thunder-client",
                 "Orta.vscode-jest",
                 "esbenp.prettier-vscode",
@@ -21,5 +19,5 @@
             
         }
     },
-    "postCreateCommand": "npm install"
+    "postCreateCommand":"npm install"
 }
