@@ -33,19 +33,19 @@ export default class BaseEntity{
   @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
     deleted_at: Date;
 
-  activate(date: Date): void {
-    this.active = true;
-    this.updated_at = date;
-  }
+  // activate(date: Date): void {
+  //   this.active = true;
+  //   this.updated_at = date;
+  // }
 
-  deactivate(date: Date): void {
-    this.active = false;
-    this.deleted_at = date;
-  }
+  // deactivate(date: Date): void {
+  //   this.active = false;
+  //   this.deleted_at = date;
+  // }
 
-  update(date: Date): void {
-    this.updated_at = date;
-  }
+  // update(date: Date): void {
+  //   this.updated_at = date;
+  // }
 
   // get id(): string {
   //   return this._id;

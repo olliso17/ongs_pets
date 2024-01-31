@@ -20,6 +20,10 @@ export class Login extends BaseEntity  {
   @Column({ type: 'varchar', length: 300 })
     localhost: string;
 
+    constructor(props: LoginProps) {
+      super();
+      Object.assign(this, props);
+    }
 
   // private _token: string;
   // private _user_id: string;
