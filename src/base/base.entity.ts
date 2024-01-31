@@ -3,53 +3,67 @@ import { Column, CreateDateColumn, PrimaryGeneratedColumn } from "typeorm";
 
 
 
-export default class BaseEntity implements BaseEntityInterface {
+export default class BaseEntity{
   @PrimaryGeneratedColumn('uuid')
-  private _id: string;
+    id: string;
 
   @Column({ type: 'boolean', default: true })
-  private _active: boolean;
+    active: boolean;
 
   @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
-  private _created_at: Date;
+    created_at: Date;
 
   @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
-  private _updated_at: Date;
+    updated_at: Date;
   
   @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
-  private _deleted_at: Date;
+  // @PrimaryGeneratedColumn('uuid')
+  // private _id: string;
+
+  // @Column({ type: 'boolean', default: true })
+  // private _active: boolean;
+
+  // @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
+  // private _created_at: Date;
+
+  // @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
+  // private _updated_at: Date;
+  // @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
+  // private _deleted_at: Date;
+  @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
+    deleted_at: Date;
 
   activate(date: Date): void {
-    this._active = true;
-    this._updated_at = date;
+    this.active = true;
+    this.updated_at = date;
   }
 
   deactivate(date: Date): void {
-    this._active = false;
-    this._deleted_at = date;
+    this.active = false;
+    this.deleted_at = date;
   }
 
   update(date: Date): void {
-    this._updated_at = date;
+    this.updated_at = date;
   }
 
-  get id(): string {
-    return this._id;
-  }
+  // get id(): string {
+  //   return this._id;
+  // }
 
-  get active(): boolean {
-    return this._active;
-  }
+  // get active(): boolean {
+  //   return this._active;
+  // }
 
-  get created_at(): Date {
-    return this._created_at;
-  }
+  // get created_at(): Date {
+  //   return this._created_at;
+  // }
 
-  get updated_at(): Date {
-    return this._updated_at;
-  }
+  // get updated_at(): Date {
+  //   return this._updated_at;
+  // }
 
-  get deleted_at(): Date {
-    return this._deleted_at;
-  }
+  // get deleted_at(): Date {
+  //   return this._deleted_at;
+  // }
 }
