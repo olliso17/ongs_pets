@@ -27,6 +27,9 @@ export default class EditPasswordUserUsecase{
         try{
           isUser.password = bcrypt.hashSync(input.new_password, salt);
           isUser.updated_at = new Date()
+          if(isUser.active === false) {
+            isUser.active = true;
+          }
           await this.usersRepository.update(isUser)
           return{message: "updated successfully"}
           

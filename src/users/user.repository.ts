@@ -28,7 +28,7 @@ export class UserRepository {
     return new_user;
   }
   async findAll():Promise<User[]> {
-     const users = await this.typeOrm.find({where: {active: true}});
+     const users = await this.typeOrm.find();
      return users;
   }
   async update(user: User): Promise<User> {
