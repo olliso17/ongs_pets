@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
+import { FindByIdUserInputDto } from "src/users/dto/active-user.dto";
 import { CreateUserOutputDto } from "src/users/dto/create-user.dto";
-import { FindByIdUserInputDto } from "src/users/dto/update-user.dto";
 import { UserRepository } from "src/users/user.repository";
 
 @Injectable()

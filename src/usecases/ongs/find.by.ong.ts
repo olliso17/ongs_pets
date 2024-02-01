@@ -15,7 +15,7 @@ export default class FindUserByIdUsecase{
         try{
           
           const user = await this.usersRepository.find(id);
-          
+    
           return user;
 
         }catch(err){

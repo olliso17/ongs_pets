@@ -7,21 +7,23 @@ import {
   Param,
   Delete,
 } from "@nestjs/common";
-import { UsersService } from "./users.service";
 import { CreateUserInputDto } from "./dto/create-user.dto";
 import CreateUseUsecase from "src/usecases/users/create.user.usecase";
-import FindUserByIdUseUsecase from "src/usecases/users/find.by.user.id";
-import FindUserByEmailUseUsecase from "src/usecases/users/find.by.user.email";
+import FindUserByIdUsecase from "src/usecases/users/find.by.user.id";
 import ActivateUseUsecase from "src/usecases/users/activate.user.usecase";
-import { FindByIdUserInputDto } from "./dto/update-user.dto";
+import { FindByIdUserInputDto } from "./dto/active-user.dto";
+import FindAllUsersUsecase from "src/usecases/users/find.all.user.usecase";
+import EditPasswordUserUsecase from "src/usecases/users/edit.user.usecase";
+import { EditPasswordUserInputDto } from "./dto/edit-user.dto";
 @Controller("users")
 export class UsersController {
   // constructor(private readonly usersService: UsersService) {}
   constructor(
     private readonly createUser: CreateUseUsecase,
-    private readonly findUser: FindUserByIdUseUsecase,
-    private readonly findUserEmail: FindUserByEmailUseUsecase,
+    private readonly findUser: FindUserByIdUsecase,
+    private readonly findAllUser: FindAllUsersUsecase,
     private readonly activateUser: ActivateUseUsecase,
+    private readonly editPasswordUser: EditPasswordUserUsecase,
   ) {}
 
   @Post("create")
@@ -29,25 +31,23 @@ export class UsersController {
     return this.createUser.create(createUserDto);
   }
 
-  // @Get()
-  // findAll() {
-  //   return this.usersService.findAll();
-  // }
+  @Get()
+  findAll() {
+    return this.findAllUser.execute();
+  }
 
   @Get(":id")
   findOne(@Param("id") id: string) {
     return this.findUser.execute(id);
   }
-  @Get(":email")
-  findEmail(@Param("email") email: string) {
-    return this.findUserEmail.execute(email);
-  }
 
   @Patch("activate")
-  activate(
-    @Body() updateUserDto: FindByIdUserInputDto,
-  ) {
+  activate(@Body() updateUserDto: FindByIdUserInputDto) {
     return this.activateUser.update(updateUserDto);
+  }
+  @Patch("edit_password")
+  editUserPassword(@Body() editUserPassword: EditPasswordUserInputDto) {
+    return this.editPasswordUser.execute(editUserPassword);
   }
 
   // @Delete(':id')

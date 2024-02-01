@@ -5,8 +5,9 @@ import User from "./entities/user.entity";
 import { UserRepository } from "./user.repository";
 import ActivateUseUsecase from "src/usecases/users/activate.user.usecase";
 import CreateUseUsecase from "src/usecases/users/create.user.usecase";
-import FindUserByIdUseUsecase from "src/usecases/users/find.by.user.id";
-import FindUserByEmailUseUsecase from "src/usecases/users/find.by.user.email";
+import FindUserByIdUsecase from "src/usecases/users/find.by.user.id";
+import FindAllUsersUsecase from "src/usecases/users/find.all.user.usecase";
+import EditPasswordUserUsecase from "src/usecases/users/edit.user.usecase";
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
@@ -14,9 +15,10 @@ import FindUserByEmailUseUsecase from "src/usecases/users/find.by.user.email";
   providers: [
     ActivateUseUsecase,
     CreateUseUsecase,
-    FindUserByIdUseUsecase,
-    FindUserByEmailUseUsecase,
+    FindUserByIdUsecase,
+    FindAllUsersUsecase,
     UserRepository,
+    EditPasswordUserUsecase
     // {
     //   provide: "UseRepo",
     //   useClass: UserRepository,

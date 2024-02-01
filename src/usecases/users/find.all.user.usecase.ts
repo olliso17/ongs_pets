@@ -1,23 +1,21 @@
 import { Injectable } from "@nestjs/common";
-import { CreateUserInputDto, CreateUserOutputDto } from "src/users/dto/create-user.dto";
-import User from "src/users/entities/user.entity";
+import { User } from "@prisma/client";
 import { UserRepository } from "src/users/user.repository";
 
 @Injectable()
-export default class FindUserByIdUsecase{
+export default class FindAllUsersUsecase{
     constructor(
         // @Inject("UserRepo")
         private usersRepository: UserRepository,
     
       ) {}
-      async execute(id: string):Promise<User | {message:string}> {
+      async execute():Promise<User[] | {message:string}> {
         
         try{
           
-          const user = await this.usersRepository.find(id);
+          const users = await this.usersRepository.findAll();
+          return users
           
-          return user;
-
         }catch(err){
           return { message:"user not found"};
         };
