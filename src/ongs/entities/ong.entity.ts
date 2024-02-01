@@ -28,7 +28,7 @@ type OngProps = {
 
 @Entity()
 @Index("idx_user_id", ["user"])
-export default class Ong extends Base{
+export default class Ong extends Base {
   @Column({ type: "varchar", length: 300 })
   name: string;
 
@@ -49,6 +49,9 @@ export default class Ong extends Base{
 
   @Column({ type: "varchar", length: 80 })
   cep: string;
+
+  @Column({ type: "varchar" }) 
+  user_id: string;
 
   @ManyToOne(() => User, user => user.ongs)
   @JoinColumn({ name: "user_id" })

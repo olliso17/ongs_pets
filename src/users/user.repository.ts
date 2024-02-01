@@ -16,7 +16,10 @@ export class UserRepository {
     return new_user;
   }
   async find(id: string): Promise<User> {
-    const user = await this.typeOrm.findOneOrFail({ where: { id: id } });
+    const user = await this.typeOrm.findOneOrFail({
+      where: { id: id },
+      relations: ["ongs"],
+    });
     return user;
   }
   async findEmail(email: string): Promise<User> {
