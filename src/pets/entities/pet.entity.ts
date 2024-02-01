@@ -12,7 +12,7 @@ type PetProps = {
   image?: string | "";
 };
 @Entity()
-@Index('idx_ong_id', ['ong'])
+@Index("idx_ong_id", ["ong"])
 export class Pet extends Base {
   @Column({ type: "varchar", length: 300 })
   name: string;
@@ -29,8 +29,11 @@ export class Pet extends Base {
   @Column({ type: "varchar", length: 300, default: "" })
   description: string;
 
-  @ManyToOne(() => Ong, (ong) => ong.pets)
-  @JoinColumn({ name: 'ong_id' })
+  @Column({ type: "varchar" })
+  ong_id: string;
+
+  @ManyToOne(() => Ong, ong => ong.pets)
+  @JoinColumn({ name: "ong_id" })
   ong: Ong;
 
   @Column({ type: "varchar", length: 300, default: "" })

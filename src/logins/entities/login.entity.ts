@@ -8,13 +8,16 @@ type LoginProps = {
   localhost: string;
 };
 @Entity()
-@Index('idx_user_id_in_login', ['user'])
+@Index("idx_user_id_in_login", ["user"])
 export class Login extends Base {
   @Column({ type: "varchar", length: 300 })
   token: string;
 
-  @ManyToOne(() => User, (user) => user.logins)
-  @JoinColumn({ name: 'user_id' })
+  @Column({ type: "varchar" })
+  user_id: string;
+  
+  @ManyToOne(() => User, user => user.logins)
+  @JoinColumn({ name: "user_id" })
   user: User;
 
   @Column({ type: "varchar", length: 300 })
