@@ -28,26 +28,26 @@ type OngProps = {
 
 @Entity()
 @Index("idx_user_id", ["user"])
-export default class Ong {
+export default class Ong extends Base{
   @Column({ type: "varchar", length: 300 })
   name: string;
 
-  @Column({ type: "varchar", length: 12, unique: true })
+  @Column({ type: "varchar", length: 80, unique: true })
   cnpj: string;
 
   @Column({ type: "varchar", length: 300 })
   address: string;
 
-  @Column({ type: "varchar", length: 50 })
+  @Column({ type: "varchar", length: 80 })
   neighborhood: string;
 
-  @Column({ type: "varchar", length: 50 })
+  @Column({ type: "varchar", length: 80 })
   state: string;
 
-  @Column({ type: "varchar", length: 10 })
+  @Column({ type: "varchar", length: 80 })
   number_address: string;
 
-  @Column({ type: "varchar", length: 15 })
+  @Column({ type: "varchar", length: 80 })
   cep: string;
 
   @ManyToOne(() => User, user => user.ongs)
