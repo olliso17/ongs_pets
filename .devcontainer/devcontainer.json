@@ -15,6 +15,7 @@
         "kavod-io.vscode-jest-test-adapter",
         "ms-vscode.js-debug-companion",
         "TabNine.tabnine-vscode",
+        "christian-kohler.npm-intellisense",
         "humao.rest-client"
       ],
       "editor.defaultFormatter": "esbenp.prettier-vscode",
