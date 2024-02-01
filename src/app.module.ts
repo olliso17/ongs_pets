@@ -8,11 +8,12 @@ import { PetsModule } from './pets/pets.module';
 import { OngsModule } from './ongs/ongs.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import dataSource, { dataSourceOptions } from 'db/data-source';
+import { RabbitmqModule } from './rabbitmq/rabbitmq.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(dataSourceOptions),
-    UsersModule, OngsModule, PetsModule, DonationsModule, LoginsModule],
+    UsersModule, OngsModule, PetsModule, DonationsModule, LoginsModule, RabbitmqModule],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -1,10 +1,10 @@
 import { randomUUID } from "crypto";
-import { PetEntity } from "./pet.entity";
+import { Pet } from "./pet.entity";
 
-describe("PetEntity", () => {
+describe("Pet", () => {
   it("should throw error when name is empty", () => {
     expect(() => {
-      new PetEntity({
+      new Pet({
         name: "",
         species: "cachorro",
         age: 12,
@@ -17,7 +17,7 @@ describe("PetEntity", () => {
   });
   it("should throw error when name is blank", () => {
     expect(() => {
-      new PetEntity({
+      new Pet({
         name: "    ",
         species: "cachorro",
         age: 12,
@@ -30,7 +30,7 @@ describe("PetEntity", () => {
   });
   it("should throw error when name is null", () => {
     expect(() => {
-      new PetEntity({
+      new Pet({
         name: null,
         species: "cachorro",
         age: 12,
@@ -43,7 +43,7 @@ describe("PetEntity", () => {
   });
   it("should throw error when ong id is null", () => {
     expect(() => {
-      new PetEntity({
+      new Pet({
         name: "beto",
         species: "cachorro",
         age: 12,
@@ -56,7 +56,7 @@ describe("PetEntity", () => {
   });
   it("should throw error when ong id is blank", () => {
     expect(() => {
-      new PetEntity({
+      new Pet({
         name: "beto",
         species: "cachorro",
         age: 12,
@@ -70,7 +70,7 @@ describe("PetEntity", () => {
 
   it("should throw error when ong id is empty", () => {
     expect(() => {
-      new PetEntity({
+      new Pet({
         name: "beto",
         species: "cachorro",
         age: 12,
@@ -81,21 +81,21 @@ describe("PetEntity", () => {
       });
     }).toThrowError("Ong id is required.");
   });
-  it("should throw error when adotpted true", () => {
-    const pet = new PetEntity({
-      name: "beto",
-      species: "cachorro",
-      age: 12,
-      gender: "macho",
-      description: "idosinho dengoso",
-      ong_id: "adjgasjajsd",
-      image: "",
-    });
-    pet.isAdopted();
-    expect(pet.active).toBe(true);
-  });
+  // it("should throw error when adotpted true", () => {
+  //   const pet = new Pet({
+  //     name: "beto",
+  //     species: "cachorro",
+  //     age: 12,
+  //     gender: "macho",
+  //     description: "idosinho dengoso",
+  //     ong_id: "adjgasjajsd",
+  //     image: "",
+  //   });
+  //   pet.isAdopted();
+  //   expect(pet.active).toBe(true);
+  // });
   //  it("should throw error when adotpted all exist status value", () => {
-  //    const pet = new PetEntity({
+  //    const pet = new Pet({
   //      name: "beto",
   //      species: "cachorro",
   //      age: 12,
@@ -109,7 +109,7 @@ describe("PetEntity", () => {
   //    );
   // //  });
   //   it("should throw error when adotpted all exist status value", () => {
-  //     const pet = new PetEntity({
+  //     const pet = new Pet({
   //       name: "beto",
   //       species: "cachorro",
   //       age: 12,

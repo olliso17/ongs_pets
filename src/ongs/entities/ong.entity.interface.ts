@@ -1,4 +1,4 @@
-import { PetEntity } from "src/pets/entities/pet.entity";
+import { Pet } from "src/pets/entities/pet.entity";
 
 export default interface OngInterface {
   get name(): string;
@@ -13,5 +13,5 @@ export default interface OngInterface {
   get maximum_pets(): number;
   get image(): string;
   validationOng();
-  addPets(pet: PetEntity): PetEntity[];
+  addPets(pet: Pet): Pet[];
 }
