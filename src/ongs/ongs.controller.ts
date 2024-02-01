@@ -6,17 +6,32 @@ import {
   Patch,
   Param,
   Delete,
+  Inject,
 } from "@nestjs/common";
 import { CreateOngInputDto } from "./dto/create-ong.dto";
 import CreateOngUsecase from "src/usecases/ongs/create.ong.usecase";
 
 @Controller("ongs")
 export class OngsController {
-  constructor(private readonly ongsService: CreateOngUsecase) {}
+  constructor(
+    private readonly ongsService: CreateOngUsecase,
+    @Inject("AxiosInstance") private readonly axios,
+  ) {}
 
   @Post("create")
-  create(@Body() createOngDto: CreateOngInputDto) {
-    return this.ongsService.create(createOngDto);
+  async create(@Body() createOngDto: CreateOngInputDto) {
+    createOngDto.cnpj = createOngDto.cnpj.replace(/\D/cg, "");
+    const response = await this.axios.get(
+      "https://www.receitaws.com.br/v1/cnpj/" + createOngDto.cnpj,
+    );
+
+    if (response.status === 200) {
+      return await this.ongsService.create(createOngDto);
+
+    } else {
+      
+      return {message:"Cnpj not found"};
+    }
   }
 
   // @Get()
