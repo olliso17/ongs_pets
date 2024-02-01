@@ -16,7 +16,11 @@
         "ms-vscode.js-debug-companion",
         "TabNine.tabnine-vscode",
         "christian-kohler.npm-intellisense",
-        "humao.rest-client"
+        "formulahendry.code-runner", 
+        "Dheovani.svg-viewer",
+        "eamodio.gitlens",
+        "alefragnani.project-manager",
+        "aaron-bond.better-comments"
       ],
       "editor.defaultFormatter": "esbenp.prettier-vscode",
       "editor.wordWrap": "on",
