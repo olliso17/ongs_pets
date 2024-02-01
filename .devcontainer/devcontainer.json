@@ -20,7 +20,9 @@
         "Dheovani.svg-viewer",
         "eamodio.gitlens",
         "alefragnani.project-manager",
-        "aaron-bond.better-comments"
+        "aaron-bond.better-comments",
+        "NuclleaR.vscode-extension-auto-import",
+        "vscode-icons-team.vscode-icons"
       ],
       "editor.defaultFormatter": "esbenp.prettier-vscode",
       "editor.wordWrap": "on",
