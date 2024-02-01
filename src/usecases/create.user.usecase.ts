@@ -5,29 +5,19 @@ import {
 } from "src/users/dto/create-user.dto";
 import User from "src/users/entities/user.entity";
 import { UserRepository } from "src/users/user.repository";
-import {
-  ClientProxy,
-  ClientProxyFactory,
-  Transport,
-} from "@nestjs/microservices";
+import * as amqp from "amqplib";
 
 const bcrypt = require("bcryptjs");
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 dotenv.config();
 @Injectable()
 export default class CreateUseUsecase {
+  private readonly rabbitMQUrl = "amqp://localhost";
+  private readonly queueName = "product_queue";
   constructor(
     // @Inject("UserRepo")
     private usersRepository: UserRepository,
-  ) {
-    this.client = ClientProxyFactory.create({
-      transport: Transport.RMQ,
-      options: {
-        urls: ["amqp://localhost:5672"],
-        queue: "product_queue",
-      },
-    });
-  }
+  ) {}
   async create(
     createUserDto: CreateUserInputDto,
   ): Promise<CreateUserOutputDto> {
@@ -47,12 +37,21 @@ export default class CreateUseUsecase {
     if (existUser === null) {
       try {
         await this.usersRepository.create(user);
-        this.client.emit("user", user);
+        await this.publishToQueue(JSON.stringify(user));
         return { message: "user created successfully" };
       } catch (err) {
         return { message: "wrong credentials check again" };
       }
     }
     return { message: "wrong credentials check again" };
+  }
+  private async publishToQueue(message: string) {
+    const connection = await amqp.connect(this.rabbitMQUrl);
+    const channel = await connection.createChannel();
+    await channel.assertQueue(this.queueName);
+    channel.sendToQueue(this.queueName, Buffer.from(message));
+    console.log(`Message sent to RabbitMQ: ${message}`);
+    await channel.close();
+    await connection.close();
   }
 }
