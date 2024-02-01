@@ -5,7 +5,6 @@ import {
 } from "src/users/dto/create-user.dto";
 import User from "src/users/entities/user.entity";
 import { UserRepository } from "src/users/user.repository";
-import * as amqp from "amqplib";
 
 const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");
@@ -25,10 +24,7 @@ export default class CreateUseUsecase {
     // const salt = "$2b$10$abcdefghijklmnopqrstuv";
     const salt = process.env.SALT;
 
-    createUserDto.email = createUserDto.name = bcrypt.hashSync(
-      createUserDto.email,
-      salt,
-    );
+    createUserDto.email = bcrypt.hashSync(createUserDto.email, salt);
     createUserDto.name = bcrypt.hashSync(createUserDto.name, salt);
     createUserDto.password = bcrypt.hashSync(createUserDto.password, salt);
     const user = new User(createUserDto);

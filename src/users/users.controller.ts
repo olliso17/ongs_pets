@@ -40,12 +40,11 @@ export class UsersController {
   }
   @Get(":email")
   findEmail(@Param("email") email: string) {
-    return this.findUser.execute(email);
+    return this.findUserEmail.execute(email);
   }
 
-  @Patch("activate/:id")
+  @Patch("activate")
   activate(
-    @Param("id") id: string,
     @Body() updateUserDto: FindByIdUserInputDto,
   ) {
     return this.activateUser.update(updateUserDto);

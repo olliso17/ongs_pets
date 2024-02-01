@@ -17,15 +17,20 @@ export default class ActivateUseUsecase {
     const existUser = await this.usersRepository.find(findByIdUserDto.id);
 
     if (existUser !== null) {
-      existUser.active = findByIdUserDto.active;
-      existUser.updated_at = new Date();
-      try {
+      if (
+        findByIdUserDto.active === existUser.active
+      ) {
+         return { message: "the status has already been implemented." };
+      }
+      if (
+        findByIdUserDto.active !== existUser.active
+      ) {
+        existUser.active = findByIdUserDto.active;
+        existUser.updated_at = new Date();
+
         await this.usersRepository.active(existUser);
-        return { message: "user updated successfully" };
-      } catch (err) {
-        return { message: "wrong credentials check again" };
+        return { message: "user updated successfully." };
       }
     }
-    return { message: "wrong credentials check again" };
   }
 }
