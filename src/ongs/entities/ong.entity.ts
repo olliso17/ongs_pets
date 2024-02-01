@@ -42,6 +42,12 @@ export default class Ong extends Base {
   neighborhood: string;
 
   @Column({ type: "varchar", length: 80 })
+  city: string;
+
+  @Column({ type: "varchar", length: 80 })
+  email_ong: string;
+
+  @Column({ type: "varchar", length: 80 })
   state: string;
 
   @Column({ type: "varchar", length: 80 })
