@@ -1,4 +1,6 @@
+import { randomUUID } from "crypto";
 import { Column, CreateDateColumn, PrimaryGeneratedColumn, Unique } from "typeorm";
+
 
 export class Base {
   @PrimaryGeneratedColumn("uuid")

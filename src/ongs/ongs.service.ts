@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { CreateOngDto } from './dto/create-ong.dto';
+import { CreateOngInputDto } from './dto/create-ong.dto';
 import { UpdateOngDto } from './dto/update-ong.dto';
 
 @Injectable()
 export class OngsService {
-  create(createOngDto: CreateOngDto) {
+  create(createOngDto: CreateOngInputDto) {
     return 'This action adds a new ong';
   }
 

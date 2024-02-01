@@ -28,9 +28,9 @@ export default class CreateUseUsecase {
     createUserDto.name = bcrypt.hashSync(createUserDto.name, salt);
     createUserDto.password = bcrypt.hashSync(createUserDto.password, salt);
     const user = new User(createUserDto);
-    const existUser = await this.usersRepository.findEmail(user.email);
+    // const existUser = await this.usersRepository.findEmail(user.email);
 
-    if (existUser === null) {
+    // if (existUser === null) {
       try {
         await this.usersRepository.create(user);
         // await this.publishToQueue(JSON.stringify(user));
@@ -39,8 +39,8 @@ export default class CreateUseUsecase {
         return { message: "wrong credentials check again" };
       }
     }
-    return { message: "wrong credentials check again" };
-  }
+    // return { message: "wrong credentials check again" };
+  // }
   // private async publishToQueue(message: string) {
   //   const connection = await amqp.connect(this.rabbitMQUrl);
   //   const channel = await connection.createChannel();

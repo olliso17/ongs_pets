@@ -2,7 +2,14 @@ import { Base } from "src/bases/entities/base.entity";
 import { Donation } from "src/donations/entities/donation.entity";
 import { Pet } from "src/pets/entities/pet.entity";
 import User from "src/users/entities/user.entity";
-import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany } from "typeorm";
+import {
+  Column,
+  Entity,
+  Index,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+} from "typeorm";
 
 type OngProps = {
   name: string;
@@ -20,8 +27,8 @@ type OngProps = {
 };
 
 @Entity()
-@Index('idx_user_id', ['user'])
-export class Ong extends Base {
+@Index("idx_user_id", ["user"])
+export default class Ong {
   @Column({ type: "varchar", length: 300 })
   name: string;
 
@@ -43,8 +50,8 @@ export class Ong extends Base {
   @Column({ type: "varchar", length: 15 })
   cep: string;
 
-  @ManyToOne(() => User, (user) => user.ongs)
-  @JoinColumn({ name: 'user_id' })
+  @ManyToOne(() => User, user => user.ongs)
+  @JoinColumn({ name: "user_id" })
   user: User;
 
   @Column({ type: "varchar", length: 300 })
@@ -64,7 +71,12 @@ export class Ong extends Base {
 
   constructor(props: OngProps) {
     super();
+
     Object.assign(this, props);
+    // this.active = true;
+    // this.created_at = new Date();
+    // this.updated_at = new Date();
+    // this.deleted_at = null;
     // this.validationOng();
   }
 }

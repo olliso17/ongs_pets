@@ -1,6 +1,6 @@
 import { Base } from "src/bases/entities/base.entity";
 import { Login } from "src/logins/entities/login.entity";
-import { Ong } from "src/ongs/entities/ong.entity";
+import Ong from "src/ongs/entities/ong.entity";
 import { Column, Entity, OneToMany } from "typeorm";
 
 
