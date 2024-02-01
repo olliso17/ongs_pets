@@ -27,5 +27,5 @@ export class Consumer {
     );
     }
 
-    startConsumer().catch(console.error);
+    // startConsumer().catch(console.error);
 }

@@ -9,18 +9,19 @@ import {
 } from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { CreateUserInputDto } from "./dto/create-user.dto";
-import { UpdateUserDto } from "./dto/update-user.dto";
-import CreateUseUsecase from "src/usecases/create.user.usecase";
-import FindUserByIdUseUsecase from "src/usecases/find.by.user.id";
-import FindUserByEmailUseUsecase from "src/usecases/find.by.user.email";
-
+import CreateUseUsecase from "src/usecases/users/create.user.usecase";
+import FindUserByIdUseUsecase from "src/usecases/users/find.by.user.id";
+import FindUserByEmailUseUsecase from "src/usecases/users/find.by.user.email";
+import ActivateUseUsecase from "src/usecases/users/activate.user.usecase";
+import { FindByIdUserInputDto } from "./dto/update-user.dto";
 @Controller("users")
 export class UsersController {
   // constructor(private readonly usersService: UsersService) {}
   constructor(
     private readonly createUser: CreateUseUsecase,
     private readonly findUser: FindUserByIdUseUsecase,
-    private readonly findUserEmail: FindUserByEmailUseUsecase
+    private readonly findUserEmail: FindUserByEmailUseUsecase,
+    private readonly activateUser: ActivateUseUsecase,
   ) {}
 
   @Post("create")
@@ -42,10 +43,13 @@ export class UsersController {
     return this.findUser.execute(email);
   }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-  //   return this.usersService.update(+id, updateUserDto);
-  // }
+  @Patch("activate/:id")
+  activate(
+    @Param("id") id: string,
+    @Body() updateUserDto: FindByIdUserInputDto,
+  ) {
+    return this.activateUser.update(updateUserDto);
+  }
 
   // @Delete(':id')
   // remove(@Param('id') id: string) {
