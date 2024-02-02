@@ -13,10 +13,21 @@ dotenv.config();
 Injectable();
 export class LoginUsecase {
   constructor(
-    private readonly loginRepository: LoginRepository,
+    private  loginRepository: LoginRepository,
+    private  userRepository: UserRepository,
   ) {}
   async execute(input: LoginInputDto) {
-   
+    // const networkInfo = os.networkInterfaces();
+    // const salt = process.env.SALT;
+    // const token = bcrypt.hashSync(input.email + input.password + "token", salt);
+    // let isUser: User;
+    // input.email = bcrypt.hashSync(input.email, salt);
+    // input.password = bcrypt.hashSync(input.password, salt);
+    // users.map( user => {
+    //   if (user.email === input.email && user.password === input.password) {
+    //     isUser = user;
+    //   }
+    // });
 
     // if (isUser.id !== "") {
     //   return { message: "Credentials invalid" };
@@ -28,8 +39,8 @@ export class LoginUsecase {
     // });
 
     try {
-    //   await this.loginRepository.create(login);
-      return { message: "Login successfully" };
+     const users = await this.userRepository.findAll();
+      return users;
     } catch (err) {
       return err;
     }

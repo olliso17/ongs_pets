@@ -15,6 +15,8 @@ import { FindByIdUserInputDto } from "./dto/active-user.dto";
 import FindAllUsersUsecase from "src/usecases/users/find.all.user.usecase";
 import EditPasswordUserUsecase from "src/usecases/users/edit.user.usecase";
 import { EditPasswordUserInputDto } from "./dto/edit-user.dto";
+import { LoginInputDto } from "src/logins/dto/login.dto";
+import { LoginUsecase } from "src/usecases/login/login.usecase";
 @Controller()
 export class UsersController {
   // constructor(private readonly usersService: UsersService) {}
@@ -24,6 +26,7 @@ export class UsersController {
     private readonly findAllUser: FindAllUsersUsecase,
     private readonly activateUser: ActivateUseUsecase,
     private readonly editPasswordUser: EditPasswordUserUsecase,
+    private readonly loginUser: LoginUsecase
   ) {}
 
   @Post("user/create")
@@ -49,7 +52,10 @@ export class UsersController {
   editUserPassword(@Body() editUserPassword: EditPasswordUserInputDto) {
     return this.editPasswordUser.execute(editUserPassword);
   }
-
+  @Get("login")
+  createLogin(@Body() LoginInputDto: LoginInputDto) {
+    return this.loginUser.execute(LoginInputDto);
+  }
   // @Delete(':id')
   // remove(@Param('id') id: string) {
   //   return this.usersService.remove(+id);

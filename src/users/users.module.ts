@@ -23,6 +23,7 @@ import { LoginRepository } from "src/logins/logins.repository";
     UserRepository,
     EditPasswordUserUsecase,
     LoginRepository,
+    LoginUsecase,
     // {
     //   provide: "UseRepo",
     //   useClass: UserRepository,
