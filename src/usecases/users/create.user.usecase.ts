@@ -1,4 +1,6 @@
 import { Injectable } from "@nestjs/common";
+import { Login } from "src/logins/entities/login.entity";
+import { LoginRepository } from "src/logins/logins.repository";
 import {
   CreateUserInputDto,
   CreateUserOutputDto,
@@ -8,6 +10,7 @@ import { UserRepository } from "src/users/user.repository";
 
 const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");
+const os = require("os");
 dotenv.config();
 @Injectable()
 export default class CreateUseUsecase {
@@ -16,23 +19,33 @@ export default class CreateUseUsecase {
   constructor(
     // @Inject("UserRepo")
     private usersRepository: UserRepository,
+    private loginRepository: LoginRepository,
   ) {}
   async create(
     createUserDto: CreateUserInputDto,
   ): Promise<CreateUserOutputDto> {
+    const networkInfo = os.networkInterfaces();
     const salt = process.env.SALT;
-
+    const token = bcrypt.hashSync(
+      createUserDto.email + createUserDto.password + "token",
+      salt,
+    );
     createUserDto.email = bcrypt.hashSync(createUserDto.email, salt);
     createUserDto.name = bcrypt.hashSync(createUserDto.name, salt);
     createUserDto.password = bcrypt.hashSync(createUserDto.password, salt);
     const user = new User(createUserDto);
 
-      try {
-        await this.usersRepository.create(user);
-        return { message: "user created successfully" };
-      } catch (err) {
-        return { message: "wrong credentials check again" };
-      }
+    try {
+      const create_user = await this.usersRepository.create(user);
+      const login = new Login({
+        user_id: create_user.id,
+        token: token,
+        localhost: networkInfo.lo[0].address,
+      });
+      await this.loginRepository.create(login);
+      return { message: "user created successfully" };
+    } catch (err) {
+      return { message: "credentials invalid" };
     }
-
+  }
 }
