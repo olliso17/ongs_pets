@@ -26,7 +26,7 @@ export class UsersController {
     private readonly findAllUser: FindAllUsersUsecase,
     private readonly activateUser: ActivateUseUsecase,
     private readonly editPasswordUser: EditPasswordUserUsecase,
-    private readonly loginUser: LoginUsecase
+    private readonly loginUser: LoginUsecase,
   ) {}
 
   @Post("user/create")
@@ -52,7 +52,8 @@ export class UsersController {
   editUserPassword(@Body() editUserPassword: EditPasswordUserInputDto) {
     return this.editPasswordUser.execute(editUserPassword);
   }
-  @Get("login")
+  
+  @Post("login")
   createLogin(@Body() LoginInputDto: LoginInputDto) {
     return this.loginUser.execute(LoginInputDto);
   }

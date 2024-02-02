@@ -1,6 +1,8 @@
 import { LoginInputDto, LoginOutputDto } from "src/logins/dto/login.dto";
 import { UserRepository } from "src/users/user.repository";
 import { Injectable } from "@nestjs/common";
+import User from "src/users/entities/user.entity";
+import { Login } from "src/logins/entities/login.entity";
 
 const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");
@@ -9,33 +11,32 @@ dotenv.config();
 
 Injectable();
 export class LoginUsecase {
-  constructor(
-    private  userRepository: UserRepository,
-  ) {}
+  constructor(private userRepository: UserRepository) {}
   async execute(input: LoginInputDto) {
-    // const networkInfo = os.networkInterfaces();
-    // const salt = process.env.SALT;
-    // const token = bcrypt.hashSync(input.email + input.password + "token", salt);
-    // let isUser: User;
-    // input.email = bcrypt.hashSync(input.email, salt);
-    // input.password = bcrypt.hashSync(input.password, salt);
-    // users.map( user => {
-    //   if (user.email === input.email && user.password === input.password) {
-    //     isUser = user;
-    //   }
-    // });
+    const users = await this.userRepository.findAll();
+    const networkInfo = os.networkInterfaces();
+    const salt = process.env.SALT;
+    const token = bcrypt.hashSync(input.email + input.password + "token", salt);
+    let isUser: User;
+    input.email = bcrypt.hashSync(input.email, salt);
+    input.password = bcrypt.hashSync(input.password, salt);
 
-    // if (isUser.id !== "") {
-    //   return { message: "Credentials invalid" };
-    // }
-    // const login = new Login({
-    //   user_id: isUser.id,
-    //   token: token,
-    //   localhost: networkInfo.lo[0].address,
-    // });
+    users.map(user => {
+      if (user.email === input.email && user.password === input.password) {
+        isUser = user;
+      }
+    });
+
+    if (isUser.id !== "") {
+      return { message: "Credentials invalid" };
+    }
+    const login = new Login({
+      user_id: isUser.id,
+      token: token,
+      localhost: networkInfo.lo[0].address,
+    });
 
     try {
-     const users = await this.userRepository.findAll();
       return users;
     } catch (err) {
       return err;

@@ -1,6 +1,5 @@
 import { Injectable } from "@nestjs/common";
 import { Login } from "src/logins/entities/login.entity";
-import { LoginRepository } from "src/logins/logins.repository";
 import {
   CreateUserInputDto,
   CreateUserOutputDto,
@@ -19,7 +18,6 @@ export default class CreateUseUsecase {
   constructor(
     // @Inject("UserRepo")
     private usersRepository: UserRepository,
-    private loginRepository: LoginRepository,
   ) {}
   async create(
     createUserDto: CreateUserInputDto,
@@ -42,7 +40,7 @@ export default class CreateUseUsecase {
         token: token,
         localhost: networkInfo.lo[0].address,
       });
-      await this.loginRepository.create(login);
+      await this.usersRepository.createLogin(login);
       return { message: "user created successfully" };
     } catch (err) {
       return { message: "credentials invalid" };
