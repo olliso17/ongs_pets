@@ -10,11 +10,13 @@ import {
 } from "@nestjs/common";
 import { CreateOngInputDto } from "./dto/create-ong.dto";
 import CreateOngUsecase from "src/usecases/ongs/create.ong.usecase";
+import FindOngByIdUsecase from "src/usecases/ongs/find.by.ong.id";
 
 @Controller("ongs")
 export class OngsController {
   constructor(
     private readonly ongCreate: CreateOngUsecase,
+    private readonly ongFindById: FindOngByIdUsecase,
     @Inject("AxiosInstance") private readonly axios,
   ) {}
 
@@ -29,7 +31,7 @@ export class OngsController {
       return { message: "Cnpj not found" };
     }
     if (response.data.situacao === "ATIVA") {
-      createOngDto.name = response.data.nome
+      createOngDto.name = response.data.nome;
       createOngDto.address = response.data.logradouro;
       createOngDto.cep = response.data.cep;
       createOngDto.number_address = response.data.numero;
@@ -41,7 +43,13 @@ export class OngsController {
 
       return await this.ongCreate.create(createOngDto);
     }
-    if (response.data.situacao === "INATIVA" || response.data.situacao === "NULA" || response.data.situacao === "INAPTA" || response.data.situacao === "SUSPENSA" || response.data.situacao === "BAIXADA") {
+    if (
+      response.data.situacao === "INATIVA" ||
+      response.data.situacao === "NULA" ||
+      response.data.situacao === "INAPTA" ||
+      response.data.situacao === "SUSPENSA" ||
+      response.data.situacao === "BAIXADA"
+    ) {
       return { message: "Cnpj not active" };
     }
   }
@@ -51,10 +59,10 @@ export class OngsController {
   //   return this.ongsService.findAll();
   // }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.ongsService.findOne(+id);
-  // }
+  @Get(":id")
+  findOne(@Param("id") id: string) {
+    return this.ongFindById.execute(id);
+  }
 
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateOngDto: UpdateOngDto) {

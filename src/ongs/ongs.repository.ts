@@ -14,10 +14,10 @@ export class OngRepository {
     const new_ong = await this.typeOrm.save(ong);
     return new_ong;
   }
-  //   async find(id: string): Promise<Ong> {
-  //     const Ong = await this.typeOrm.findOneOrFail({ where: { id: id } });
-  //     return Ong;
-  //   }
+  async find(id: string): Promise<Ong> {
+    const Ong = await this.typeOrm.findOneOrFail({ where: { id } });
+    return Ong;
+  }
   //   async active(Ong: Ong): Promise<Ong> {
   //     const new_Ong = await this.typeOrm.save(Ong);
   //     return new_Ong;

@@ -82,10 +82,5 @@ export default class Ong extends Base {
     super();
 
     Object.assign(this, props);
-    // this.active = true;
-    // this.created_at = new Date();
-    // this.updated_at = new Date();
-    // this.deleted_at = null;
-    // this.validationOng();
   }
 }
