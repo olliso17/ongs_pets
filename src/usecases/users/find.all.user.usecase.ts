@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { User } from "@prisma/client";
+import User from "src/users/entities/user.entity";
 import { UserRepository } from "src/users/user.repository";
 
 @Injectable()

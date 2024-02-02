@@ -4,10 +4,16 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import CreateOngUsecase from "src/usecases/ongs/create.ong.usecase";
 import { OngRepository } from "./ongs.repository";
 import Ong from "./entities/ong.entity";
-import axios from 'axios';
+import axios from "axios";
+import FindOngByIdUsecase from "src/usecases/ongs/find.by.ong.id";
 @Module({
   imports: [TypeOrmModule.forFeature([Ong])],
   controllers: [OngsController],
-  providers: [CreateOngUsecase, OngRepository, {provide: 'AxiosInstance', useValue: axios }],
+  providers: [
+    CreateOngUsecase,
+    FindOngByIdUsecase,
+    OngRepository,
+    { provide: "AxiosInstance", useValue: axios },
+  ],
 })
 export class OngsModule {}
