@@ -10,7 +10,6 @@ import FindAllUsersUsecase from "src/usecases/users/find.all.user.usecase";
 import EditPasswordUserUsecase from "src/usecases/users/edit.user.usecase";
 import { Login } from "src/logins/entities/login.entity";
 import { LoginUsecase } from "src/usecases/login/login.usecase";
-import { LoginRepository } from "src/logins/logins.repository";
 
 @Module({
   imports: [TypeOrmModule.forFeature([User, Login])],
@@ -22,7 +21,6 @@ import { LoginRepository } from "src/logins/logins.repository";
     FindAllUsersUsecase,
     UserRepository,
     EditPasswordUserUsecase,
-    LoginRepository,
     LoginUsecase,
     // {
     //   provide: "UseRepo",
