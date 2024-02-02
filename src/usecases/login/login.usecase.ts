@@ -13,7 +13,6 @@ dotenv.config();
 Injectable();
 export class LoginUsecase {
   constructor(
-    private  loginRepository: LoginRepository,
     private  userRepository: UserRepository,
   ) {}
   async execute(input: LoginInputDto) {
