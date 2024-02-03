@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Pet } from "./entities/pet.entity";
+import { UpdatePetInputDto } from "./dto/update-pet.dto";
 
 @Injectable()
 export class PetRepository {
@@ -26,12 +27,12 @@ export class PetRepository {
 //     const Pets = await this.typeOrm.find({ relations: ["pets", "donations"] });
 //     return Pets;
 //   }
-//   async findAllActive(): Promise<Pet[]> {
-//     const Pets = await this.typeOrm.find({ where: { active: true }, relations: ["pets", "donations"] });
-//     return Pets;
-//   }
-//   async update(updatePetDto: UpdatePetInputDto): Promise<Pet> {
-//     const new_Pet = await this.typeOrm.save(updatePetDto);
-//     return new_Pet;
-//   }
+  async findAllActive(): Promise<Pet[]> {
+    const Pets = await this.typeOrm.find({ where: { active: true }});
+    return Pets;
+  }
+  async update(updatePetDto: UpdatePetInputDto): Promise<Pet> {
+    const new_Pet = await this.typeOrm.save(updatePetDto);
+    return new_Pet;
+  }
 }

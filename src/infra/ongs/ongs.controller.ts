@@ -40,7 +40,7 @@ export class OngsController {
   findAllOng() {
     return this.findAll.execute();
   }
-  @Get("ong/active")
+  @Get("ongs/active")
   findAllOngActive() {
     return this.findAllActive.execute();
   }
