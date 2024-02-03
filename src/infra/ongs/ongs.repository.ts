@@ -24,7 +24,11 @@ export class OngRepository {
     return new_Ong;
   }
   async findAll(): Promise<Ong[]> {
-    const ongs = await this.typeOrm.find();
+    const ongs = await this.typeOrm.find({ relations: ["pets", "donations"] });
+    return ongs;
+  }
+  async findAllActive(): Promise<Ong[]> {
+    const ongs = await this.typeOrm.find({ where: { active: true }, relations: ["pets", "donations"] });
     return ongs;
   }
   async update(updateOngDto: UpdateOngInputDto): Promise<Ong> {

@@ -15,7 +15,8 @@ import { UpdateOngInputDto } from "./dto/update-ong.dto";
 import { EditOngUsecase } from "src/usecases/ongs/edit.ong.usecase";
 import ActivateOngUsecase from "src/usecases/ongs/activate.ong.usecase";
 import { FindByIdOngInputDto } from "./dto/active-ong.dto";
-import FindAllOngsUsecase from "src/usecases/ongs/find.all.ong.usecase";
+import FindAllOngsUsecase from "src/usecases/ongs/find.all.active.ong.usecase";
+import FindAllActiveOngsUsecase from "src/usecases/ongs/find.all.active.ong.usecase";
 
 @Controller()
 export class OngsController {
@@ -24,7 +25,8 @@ export class OngsController {
     private readonly ongFindById: FindOngByIdUsecase,
     private readonly updateOng: EditOngUsecase,
     private readonly activeOng: ActivateOngUsecase,
-    private readonly findAllOng: FindAllOngsUsecase
+    private readonly findAllOng: FindAllOngsUsecase,
+    private readonly findAllActive:FindAllActiveOngsUsecase
     // @Inject("AxiosInstance") private readonly axios,
   ) {}
 
@@ -35,9 +37,13 @@ export class OngsController {
  
   }
 
-  @Get("ongs")
+  @Get("ongs/all")
   findAll() {
     return this.findAllOng.execute();
+  }
+  @Get("ongs/active")
+  findAllOngActive() {
+    return this.findAllActive.execute();
   }
   @Patch("ong/activate/:id")
   activate(@Param("id") id: string, @Body() updateOngDto: FindByIdOngInputDto) {
