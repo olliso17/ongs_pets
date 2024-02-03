@@ -5,7 +5,7 @@ import { Column, Entity, Index, JoinColumn, ManyToOne } from "typeorm";
 type PetProps = {
   name: string;
   species: string;
-  age: number;
+  age?: number;
   gender: string;
   description?: string | "";
   ong_id: string;
@@ -36,7 +36,7 @@ export class Pet extends Base {
   @JoinColumn({ name: "ong_id" })
   ong: Ong;
 
-  @Column({ type: "varchar", length: 300, default: "" })
+  @Column({ type: "varchar", default: "" })
   image: string;
 
   @Column({ type: "boolean", default: false })

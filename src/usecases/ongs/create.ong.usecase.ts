@@ -21,22 +21,10 @@ export default class CreateOngUsecase {
       return {message:"CNPJ is invalid"}
     }
     if (response.data.situacao === "ATIVA") {
-      ong = new Ong({
-        cnpj: createOngDto.cnpj,
-        name: response.data.nome,
-        address: response.data.logradouro,
-        cep: response.data.cep,
-        number_address: response.data.numero,
-        neighborhood: response.data.bairro,
-        city: response.data.municipio,
-        state: response.data.uf,
-        telephone: response.data.telefone,
-        email_ong: response.data.email,
-        user_id: createOngDto.user_id
-      });
-   
+      Object.assign(ong,createOngDto);
+      Object.assign(ong, response.data)
+    } 
 
-    }
 
     if (
       response.data.situacao === "INATIVA" ||
