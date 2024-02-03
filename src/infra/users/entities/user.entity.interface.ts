@@ -1,5 +1,5 @@
-import { Login } from "src/logins/entities/login.entity";
-import Ong from "src/ongs/entities/ong.entity";
+import { Login } from "src/infra/logins/entities/login.entity";
+import Ong from "src/infra/ongs/entities/ong.entity";
 
 export default interface UserInterface {
   get name(): string;

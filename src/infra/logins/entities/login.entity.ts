@@ -1,5 +1,5 @@
-import { Base } from "src/bases/entities/base.entity";
-import User from "src/users/entities/user.entity";
+import { Base } from "src/infra/bases/entities/base.entity";
+import User from "src/infra/users/entities/user.entity";
 import { Column, Entity, Index, JoinColumn, ManyToOne } from "typeorm";
 
 type LoginProps = {

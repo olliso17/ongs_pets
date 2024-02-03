@@ -19,10 +19,10 @@ export class OngRepository {
     const Ong = await this.typeOrm.findOneOrFail({ where: { id }, relations: ["pets", "donations"], });
     return Ong;
   }
-  //   async active(Ong: Ong): Promise<Ong> {
-  //     const new_Ong = await this.typeOrm.save(Ong);
-  //     return new_Ong;
-  //   }
+    async active(Ong: Ong): Promise<Ong> {
+      const new_Ong = await this.typeOrm.save(Ong);
+      return new_Ong;
+    }
   //   async findAll(user_id: string) {
   //     this.typeOrm.findOneOrFail({ where: { user_id } });
   //   }

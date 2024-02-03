@@ -1,7 +1,7 @@
-import { Base } from "src/bases/entities/base.entity";
-import { Donation } from "src/donations/entities/donation.entity";
-import { Pet } from "src/pets/entities/pet.entity";
-import User from "src/users/entities/user.entity";
+import { Base } from "src/infra/bases/entities/base.entity";
+import { Donation } from "src/infra/donations/entities/donation.entity";
+import { Pet } from "src/infra/pets/entities/pet.entity";
+import User from "src/infra/users/entities/user.entity";
 import {
   Column,
   Entity,

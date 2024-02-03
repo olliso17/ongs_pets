@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
-import Ong from "src/ongs/entities/ong.entity";
-import { OngRepository } from "src/ongs/ongs.repository";
+import Ong from "src/infra/ongs/entities/ong.entity";
+import { OngRepository } from "src/infra/ongs/ongs.repository";
 
 @Injectable()
 export default class FindOngByIdUsecase {

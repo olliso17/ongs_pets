@@ -1,11 +1,8 @@
 import { Injectable } from "@nestjs/common";
-import { Login } from "src/logins/entities/login.entity";
-import {
-  CreateUserInputDto,
-  CreateUserOutputDto,
-} from "src/users/dto/create-user.dto";
-import User from "src/users/entities/user.entity";
-import { UserRepository } from "src/users/user.repository";
+import { Login } from "src/infra/logins/entities/login.entity";
+import { CreateUserInputDto, CreateUserOutputDto } from "src/infra/users/dto/create-user.dto";
+import User from "src/infra/users/entities/user.entity";
+import { UserRepository } from "src/infra/users/user.repository";
 
 const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");

@@ -2,8 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import User from "./entities/user.entity";
-import { FindByIdUserInputDto } from "./dto/active-user.dto";
-import { Login } from "src/logins/entities/login.entity";
+import { Login } from "src/infra/logins/entities/login.entity";
 
 @Injectable()
 export class UserRepository {

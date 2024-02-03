@@ -13,13 +13,16 @@ import CreateOngUsecase from "src/usecases/ongs/create.ong.usecase";
 import FindOngByIdUsecase from "src/usecases/ongs/find.by.ong.id";
 import { UpdateOngInputDto } from "./dto/update-ong.dto";
 import { EditOngUsecase } from "src/usecases/ongs/edit.ong.usecase";
+import ActivateOngUsecase from "src/usecases/ongs/activate.ong.usecase";
+import { FindByIdOngInputDto } from "./dto/active-ong.dto";
 
 @Controller()
 export class OngsController {
   constructor(
     private readonly ongCreate: CreateOngUsecase,
     private readonly ongFindById: FindOngByIdUsecase,
-    private readonly updateOng: EditOngUsecase
+    private readonly updateOng: EditOngUsecase,
+    private readonly activeOng: ActivateOngUsecase
     // @Inject("AxiosInstance") private readonly axios,
   ) {}
 
@@ -34,7 +37,10 @@ export class OngsController {
   // findAll() {
   //   return this.ongsService.findAll();
   // }
-
+  @Patch("ong/activate/:id")
+  activate(@Param("id") id: string, @Body() updateOngDto: FindByIdOngInputDto) {
+    return this.activeOng.execute(id,updateOngDto);
+  }
   @Get("ong/:id")
   findOne(@Param("id") id: string) {
     return this.ongFindById.execute(id);

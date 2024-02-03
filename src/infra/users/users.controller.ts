@@ -15,7 +15,7 @@ import { FindByIdUserInputDto } from "./dto/active-user.dto";
 import FindAllUsersUsecase from "src/usecases/users/find.all.user.usecase";
 import EditPasswordUserUsecase from "src/usecases/users/edit.user.usecase";
 import { EditPasswordUserInputDto } from "./dto/edit-user.dto";
-import { LoginInputDto } from "src/logins/dto/login.dto";
+import { LoginInputDto } from "src/infra/logins/dto/login.dto";
 import { LoginUsecase } from "src/usecases/login/login.usecase";
 @Controller()
 export class UsersController {
@@ -44,9 +44,9 @@ export class UsersController {
     return this.findUser.execute(id);
   }
 
-  @Patch("user/activate")
-  activate(@Body() updateUserDto: FindByIdUserInputDto) {
-    return this.activateUser.update(updateUserDto);
+  @Patch("user/activate/:id")
+  activate(@Param("id") id: string, @Body() updateUserDto: FindByIdUserInputDto) {
+    return this.activateUser.update(id,updateUserDto);
   }
   @Patch("user/edit_password")
   editUserPassword(@Body() editUserPassword: EditPasswordUserInputDto) {

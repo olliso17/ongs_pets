@@ -1,8 +1,8 @@
-import { LoginInputDto, LoginOutputDto } from "src/logins/dto/login.dto";
-import { UserRepository } from "src/users/user.repository";
+import { LoginInputDto, LoginOutputDto } from "src/infra/logins/dto/login.dto";
 import { Injectable } from "@nestjs/common";
-import User from "src/users/entities/user.entity";
-import { Login } from "src/logins/entities/login.entity";
+import { Login } from "src/infra/logins/entities/login.entity";
+import { UserRepository } from "src/infra/users/user.repository";
+import User from "src/infra/users/entities/user.entity";
 
 const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");

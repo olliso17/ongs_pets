@@ -8,7 +8,7 @@ import CreateUseUsecase from "src/usecases/users/create.user.usecase";
 import FindUserByIdUsecase from "src/usecases/users/find.by.user.id";
 import FindAllUsersUsecase from "src/usecases/users/find.all.user.usecase";
 import EditPasswordUserUsecase from "src/usecases/users/edit.user.usecase";
-import { Login } from "src/logins/entities/login.entity";
+import { Login } from "src/infra/logins/entities/login.entity";
 import { LoginUsecase } from "src/usecases/login/login.usecase";
 
 @Module({

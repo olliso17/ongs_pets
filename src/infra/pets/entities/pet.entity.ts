@@ -1,5 +1,5 @@
-import { Base } from "src/bases/entities/base.entity";
-import Ong from "src/ongs/entities/ong.entity";
+import { Base } from "src/infra/bases/entities/base.entity";
+import Ong from "src/infra/ongs/entities/ong.entity";
 import { Column, Entity, Index, JoinColumn, ManyToOne } from "typeorm";
 
 type PetProps = {

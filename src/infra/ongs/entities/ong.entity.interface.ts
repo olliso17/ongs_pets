@@ -1,4 +1,4 @@
-import { Pet } from "src/pets/entities/pet.entity";
+import { Pet } from "src/infra/pets/entities/pet.entity";
 
 export default interface OngInterface {
   get name(): string;

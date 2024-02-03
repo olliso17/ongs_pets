@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
-import { EditPasswordUserInputDto } from "src/users/dto/edit-user.dto";
-import User from "src/users/entities/user.entity";
-import { UserRepository } from "src/users/user.repository";
+import { EditPasswordUserInputDto } from "src/infra/users/dto/edit-user.dto";
+import User from "src/infra/users/entities/user.entity";
+import { UserRepository } from "src/infra/users/user.repository";
 
 const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");

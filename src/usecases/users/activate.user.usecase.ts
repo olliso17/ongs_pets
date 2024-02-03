@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
-import { FindByIdUserInputDto } from "src/users/dto/active-user.dto";
-import { CreateUserOutputDto } from "src/users/dto/create-user.dto";
-import { UserRepository } from "src/users/user.repository";
+import { FindByIdUserInputDto } from "src/infra/users/dto/active-user.dto";
+import { CreateUserOutputDto } from "src/infra/users/dto/create-user.dto";
+import { UserRepository } from "src/infra/users/user.repository";
 
 @Injectable()
 export default class ActivateUseUsecase {
@@ -11,10 +11,10 @@ export default class ActivateUseUsecase {
     // @Inject("UserRepo")
     private usersRepository: UserRepository,
   ) {}
-  async update(
+  async update(id,
     findByIdUserDto: FindByIdUserInputDto,
   ): Promise<CreateUserOutputDto> {
-    const existUser = await this.usersRepository.find(findByIdUserDto.id);
+    const existUser = await this.usersRepository.find(id);
 
     if (existUser !== null) {
       if (
