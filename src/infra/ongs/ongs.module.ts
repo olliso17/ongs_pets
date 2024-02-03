@@ -10,6 +10,8 @@ import { EditOngUsecase } from "src/usecases/ongs/edit.ong.usecase";
 import ActivateOngUsecase from "src/usecases/ongs/activate.ong.usecase";
 import FindAllActiveOngsUsecase from "src/usecases/ongs/find.all.active.ong.usecase";
 import FindAllOngsUsecase from "src/usecases/ongs/find.all.ong.usecase copy";
+import { AuthGuard } from "../auth/auth.guard";
+
 @Module({
   imports: [TypeOrmModule.forFeature([Ong])],
   controllers: [OngsController],
@@ -21,6 +23,7 @@ import FindAllOngsUsecase from "src/usecases/ongs/find.all.ong.usecase copy";
     ActivateOngUsecase,
     FindAllOngsUsecase,
     FindAllActiveOngsUsecase,
+    AuthGuard,
     
     { provide: "AxiosInstance", useValue: axios },
   ],

@@ -8,18 +8,12 @@ import { Login } from "src/infra/logins/entities/login.entity";
 export class UserRepository {
   constructor(
     @InjectRepository(User)
-    private typeOrm: Repository<User>,
-    @InjectRepository(Login)
-    private typeOrmLogin: Repository<Login>,
+    private typeOrm: Repository<User>
   ) {}
 
   async create(user: User): Promise<User> {
     const new_user = await this.typeOrm.save(user);
     return new_user;
-  }
-  async createLogin(login: Login): Promise<Login> {
-    const new_login = await this.typeOrmLogin.save(login);
-    return new_login;
   }
   async find(id: string): Promise<User> {
     const user = await this.typeOrm.findOneOrFail({

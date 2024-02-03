@@ -6,6 +6,9 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
+  ForbiddenException,
+  Req,
 } from "@nestjs/common";
 import { CreateUserInputDto } from "./dto/create-user.dto";
 import CreateUseUsecase from "src/usecases/users/create.user.usecase";
@@ -17,6 +20,7 @@ import EditPasswordUserUsecase from "src/usecases/users/edit.user.usecase";
 import { EditPasswordUserInputDto } from "./dto/edit-user.dto";
 import { LoginInputDto } from "src/infra/logins/dto/login.dto";
 import { LoginUsecase } from "src/usecases/login/login.usecase";
+import { AuthGuard, Public } from "../auth/auth.guard";
 @Controller()
 export class UsersController {
   // constructor(private readonly usersService: UsersService) {}
@@ -29,34 +33,41 @@ export class UsersController {
     private readonly loginUser: LoginUsecase,
   ) {}
 
+  @Public()
   @Post("user/create")
   create(@Body() createUserDto: CreateUserInputDto) {
     return this.createUser.create(createUserDto);
   }
 
   @Get("users")
+  @UseGuards(AuthGuard)
   findAll() {
     return this.findAllUser.execute();
   }
 
   @Get("user/:id")
-  findOne(@Param("id") id: string) {
+  @UseGuards(AuthGuard)
+  findOne(@Param("id") id: string, @Req() req) {
+    const authenticatedUser = req.user;
+
+  // Verifique se o usuário autenticado tem permissão para acessar o recurso com o ID fornecido
+  if (authenticatedUser.id !== id) {
+    throw new ForbiddenException('Você não tem permissão para acessar este recurso.');
+  }
     return this.findUser.execute(id);
   }
 
   @Patch("user/activate/:id")
+  @UseGuards(AuthGuard)
   activate(@Param("id") id: string, @Body() updateUserDto: FindByIdUserInputDto) {
     return this.activateUser.update(id,updateUserDto);
   }
+  @Public()
   @Patch("user/edit_password")
   editUserPassword(@Body() editUserPassword: EditPasswordUserInputDto) {
     return this.editPasswordUser.execute(editUserPassword);
   }
   
-  @Post("login")
-  createLogin(@Body() LoginInputDto: LoginInputDto) {
-    return this.loginUser.execute(LoginInputDto);
-  }
   // @Delete(':id')
   // remove(@Param('id') id: string) {
   //   return this.usersService.remove(+id);

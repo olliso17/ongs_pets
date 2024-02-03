@@ -1,45 +1,53 @@
-import { LoginInputDto, LoginOutputDto } from "src/infra/logins/dto/login.dto";
-import { Injectable } from "@nestjs/common";
-import { Login } from "src/infra/logins/entities/login.entity";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { UserRepository } from "src/infra/users/user.repository";
-import User from "src/infra/users/entities/user.entity";
+import { Login } from "src/infra/logins/entities/login.entity";
+import * as bcrypt from "bcryptjs";
+import { v4 as uuidv4 } from "uuid";
+import { LoginInputDto } from "src/infra/logins/dto/login.dto";
+import { LoginRepository } from "src/infra/logins/login.repository";
 
-const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");
 const os = require("os");
 dotenv.config();
-
-Injectable();
+@Injectable()
 export class LoginUsecase {
-  constructor(private userRepository: UserRepository) {}
-  async execute(input: LoginInputDto) {
+  constructor(
+    private userRepository: UserRepository,
+    private loginRepository: LoginRepository
+    ) {}
+
+  async execute(input: LoginInputDto): Promise<string> {
     const users = await this.userRepository.findAll();
     const networkInfo = os.networkInterfaces();
     const salt = process.env.SALT;
-    const token = bcrypt.hashSync(input.email + input.password + "token", salt);
-    let isUser: User;
-    input.email = bcrypt.hashSync(input.email, salt);
-    input.password = bcrypt.hashSync(input.password, salt);
 
-    users.map(user => {
-      if (user.email === input.email && user.password === input.password) {
-        isUser = user;
-      }
-    });
+  
+    const hashedEmail = bcrypt.hashSync(input.email, salt);
+    const hashedPassword = bcrypt.hashSync(input.password, salt);
 
-    if (isUser.id !== "") {
-      return { message: "Credentials invalid" };
+    const isUser = users.find(
+      (user) => user.email === hashedEmail && user.password === hashedPassword
+    );
+
+    if (!isUser) {
+      throw new UnauthorizedException("Credentials invalid");
     }
+
+    const token = bcrypt.hashSync(`${isUser.id}${uuidv4()}`, salt);
+
+   
     const login = new Login({
       user_id: isUser.id,
       token: token,
       localhost: networkInfo.lo[0].address,
     });
 
+   
     try {
-      return users;
+      await this.loginRepository.createLogin(login); 
+      return token;
     } catch (err) {
-      return err;
+      throw new UnauthorizedException("Failed to generate token");
     }
   }
 }
