@@ -12,16 +12,18 @@ import {
 } from "typeorm";
 
 type OngProps = {
-  name: string;
+  name?: string;
   cnpj: string;
-  address: string;
-  neighborhood: string;
-  state: string;
-  number_address: string;
-  cep: string;
+  address?: string;
+  neighborhood?: string;
+  state?: string;
+  number_address?: string;
+  cep?: string;
   user_id: string;
-  telephone: string;
+  city?:string;
+  telephone?: string;
   maximum_pets?: number | 0;
+  email_ong?: string;
   image?: string | "";
   pets?: Pet[] | [];
 };

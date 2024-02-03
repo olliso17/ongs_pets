@@ -1,9 +1,11 @@
-import { Ong } from "./ong.entity";
+import Ong from "./ong.entity";
+
 
 describe("Ong", () => {
   it("should throw error when name is empty", () => {
     expect(() => {
       new Ong({
+        city:"Aracaju",
         name: "",
         cnpj: "12.345.678/0001-90",
         address: "string;",
@@ -21,6 +23,7 @@ describe("Ong", () => {
   it("should throw error when name is empty", () => {
     expect(() => {
       new Ong({
+        city:"Aracaju",
         name: "   ",
         cnpj: "12.345.678/0001-90",
         address: "string;",
@@ -38,6 +41,7 @@ describe("Ong", () => {
   it("should throw error when name is null", () => {
     expect(() => {
       new Ong({
+        city:"Aracaju",
         name: null,
         cnpj: "12.345.678/0001-90",
         address: "string;",
@@ -55,6 +59,7 @@ describe("Ong", () => {
   it("should throw error when address is empty", () => {
     expect(() => {
       new Ong({
+        city:"Aracaju",
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "",
@@ -72,6 +77,7 @@ describe("Ong", () => {
   it("should throw error when address is null", () => {
     expect(() => {
       new Ong({
+        city:"Aracaju",
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: null,
@@ -89,6 +95,7 @@ describe("Ong", () => {
   it("should throw error when address is blank", () => {
     expect(() => {
       new Ong({
+        city:"Aracaju",
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "    ",
@@ -106,6 +113,7 @@ describe("Ong", () => {
   it("should throw error when neighborhood is blank", () => {
     expect(() => {
       new Ong({
+        city:"Aracaju",
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "taladd",
@@ -123,6 +131,7 @@ describe("Ong", () => {
   it("should throw error when neighborhood is null", () => {
     expect(() => {
       new Ong({
+        city:"Aracaju",
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "taladd",
@@ -140,6 +149,7 @@ describe("Ong", () => {
   it("should throw error when neighborhood is empty", () => {
     expect(() => {
       new Ong({
+        city:"Aracaju",
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "taladd",
@@ -157,6 +167,7 @@ describe("Ong", () => {
   it("should throw error when state is empty", () => {
     expect(() => {
       new Ong({
+        city:"Aracaju",
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "taladd",
@@ -174,6 +185,7 @@ describe("Ong", () => {
   it("should throw error when state is null", () => {
     expect(() => {
       new Ong({
+        city:"Aracaju",
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "taladd",
@@ -191,6 +203,7 @@ describe("Ong", () => {
   it("should throw error when state is blank", () => {
     expect(() => {
       new Ong({
+        city:"Aracaju",
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "taladd",
@@ -208,6 +221,7 @@ describe("Ong", () => {
   it("should throw error when number address is blank", () => {
     expect(() => {
       new Ong({
+        city:"Aracaju",
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "taladd",
@@ -225,6 +239,7 @@ describe("Ong", () => {
   it("should throw error when number address is blank", () => {
     expect(() => {
       new Ong({
+        city:"Aracaju",
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "taladd",
@@ -242,6 +257,7 @@ describe("Ong", () => {
   it("should throw error when number address is blank", () => {
     expect(() => {
       new Ong({
+        city:"Aracaju",
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "taladd",
@@ -259,6 +275,7 @@ describe("Ong", () => {
   it("should throw error when cep not found", () => {
     expect(() => {
       new Ong({
+        city:"Aracaju",
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "taladd",
@@ -276,6 +293,7 @@ describe("Ong", () => {
   it("should throw error when user id is blank", () => {
     expect(() => {
       new Ong({
+        city:"Aracaju",
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "taladd",
@@ -293,6 +311,7 @@ describe("Ong", () => {
   it("should throw error when user id is empty", () => {
     expect(() => {
       new Ong({
+        city:"Aracaju",
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "taladd",
@@ -310,6 +329,7 @@ describe("Ong", () => {
   it("should throw error when user id is null", () => {
     expect(() => {
       new Ong({
+        city:"Aracaju",
         name: "ong pet",
         cnpj: "12.345.678/0001-90",
         address: "taladd",
@@ -327,6 +347,7 @@ describe("Ong", () => {
   it("should throw error when cnpj is empty", () => {
     expect(() => {
       new Ong({
+        city:"Aracaju",
         name: "ong pet",
         cnpj: "1234678000190",
         address: "taladd",
