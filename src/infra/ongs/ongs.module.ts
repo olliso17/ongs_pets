@@ -8,6 +8,7 @@ import axios from "axios";
 import FindOngByIdUsecase from "src/usecases/ongs/find.by.ong.id";
 import { EditOngUsecase } from "src/usecases/ongs/edit.ong.usecase";
 import ActivateOngUsecase from "src/usecases/ongs/activate.ong.usecase";
+import FindAllOngsUsecase from "src/usecases/ongs/find.all.ong.usecase";
 @Module({
   imports: [TypeOrmModule.forFeature([Ong])],
   controllers: [OngsController],
@@ -17,6 +18,7 @@ import ActivateOngUsecase from "src/usecases/ongs/activate.ong.usecase";
     EditOngUsecase,
     OngRepository,
     ActivateOngUsecase,
+    FindAllOngsUsecase,
     
     { provide: "AxiosInstance", useValue: axios },
   ],

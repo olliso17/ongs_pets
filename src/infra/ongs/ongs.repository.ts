@@ -19,18 +19,16 @@ export class OngRepository {
     const Ong = await this.typeOrm.findOneOrFail({ where: { id }, relations: ["pets", "donations"], });
     return Ong;
   }
-    async active(Ong: Ong): Promise<Ong> {
-      const new_Ong = await this.typeOrm.save(Ong);
-      return new_Ong;
-    }
-  //   async findAll(user_id: string) {
-  //     this.typeOrm.findOneOrFail({ where: { user_id } });
-  //   }
+  async active(Ong: Ong): Promise<Ong> {
+    const new_Ong = await this.typeOrm.save(Ong);
+    return new_Ong;
+  }
+  async findAll(): Promise<Ong[]> {
+    const ongs = await this.typeOrm.find();
+    return ongs;
+  }
   async update(updateOngDto: UpdateOngInputDto): Promise<Ong> {
     const new_ong = await this.typeOrm.save(updateOngDto);
     return new_ong;
   }
-  // isActiveOngId(Ong_id: string, status: any): Promise<Ong> {
-  //   throw new Error("Method not implemented.");
-  // }
 }
