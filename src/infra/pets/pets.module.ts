@@ -7,13 +7,14 @@ import { PetRepository } from './pets.repository';
 import FindPetByIdUsecase from 'src/usecases/pets/find.by.pet.id';
 import FindAllActivePetsUsecase from 'src/usecases/pets/find.all.active.pet.usecase';
 import { EditPetUsecase } from 'src/usecases/pets/edit.pet.usecase';
+import ActivatePetUsecase from 'src/usecases/pets/activate.pet.usecase';
 
 
 @Module({
   imports: [TypeOrmModule.forFeature([Pet])],
   controllers: [PetsController],
   providers: [
-    CreatePetUsecase, PetRepository, FindPetByIdUsecase, FindAllActivePetsUsecase, EditPetUsecase, 
+    CreatePetUsecase, PetRepository, FindPetByIdUsecase, FindAllActivePetsUsecase, EditPetUsecase, ActivatePetUsecase
   ],
 })
 export class PetsModule { }

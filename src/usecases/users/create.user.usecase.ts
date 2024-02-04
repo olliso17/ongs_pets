@@ -14,7 +14,6 @@ export default class CreateUseUsecase {
   private readonly rabbitMQUrl = "amqp://localhost";
   private readonly queueName = "product_queue";
   constructor(
-    // @Inject("UserRepo")
     private usersRepository: UserRepository,
     private loginRepository: LoginRepository,
   ) {}

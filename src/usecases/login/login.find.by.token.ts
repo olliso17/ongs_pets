@@ -5,7 +5,6 @@ import { UserRepository } from "src/infra/users/user.repository";
 @Injectable()
 export default class FindLoginByIdUsecase{
     constructor(
-        // @Inject("LoginRepo")
         private loginRepository: LoginRepository,
     
       ) {}

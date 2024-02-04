@@ -35,7 +35,4 @@ export class UserRepository {
     const new_user = await this.typeOrm.save(user);
     return new_user;
   }
-  // isActiveUserId(user_id: string, status: any): Promise<User> {
-  //   throw new Error("Method not implemented.");
-  // }
 }

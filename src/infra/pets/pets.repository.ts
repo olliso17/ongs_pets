@@ -19,16 +19,13 @@ export class PetRepository {
     const Pet = await this.typeOrm.findOneOrFail({ where: { id } });
     return Pet;
   }
-//   async active(Pet: Pet): Promise<Pet> {
-//     const new_Pet = await this.typeOrm.save(Pet);
-//     return new_Pet;
-//   }
-//   async findAll(): Promise<Pet[]> {
-//     const Pets = await this.typeOrm.find({ relations: ["pets", "donations"] });
-//     return Pets;
-//   }
+  async active(Pet: Pet): Promise<Pet> {
+    const new_Pet = await this.typeOrm.save(Pet);
+    return new_Pet;
+  }
+
   async findAllActive(): Promise<Pet[]> {
-    const Pets = await this.typeOrm.find({ where: { active: true }});
+    const Pets = await this.typeOrm.find({ where: { active: true } });
     return Pets;
   }
   async update(updatePetDto: UpdatePetInputDto): Promise<Pet> {

@@ -47,13 +47,7 @@ export class UsersController {
 
   @Get("user/:id")
   @UseGuards(AuthGuard)
-  findOne(@Param("id") id: string, @Req() req) {
-    const authenticatedUser = req.user;
-
-  // Verifique se o usuário autenticado tem permissão para acessar o recurso com o ID fornecido
-  if (authenticatedUser.id !== id) {
-    throw new ForbiddenException('Você não tem permissão para acessar este recurso.');
-  }
+  findOne(@Param("id") id: string) {
     return this.findUser.execute(id);
   }
 
@@ -68,8 +62,4 @@ export class UsersController {
     return this.editPasswordUser.execute(editUserPassword);
   }
   
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.usersService.remove(+id);
-  // }
 }
