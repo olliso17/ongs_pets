@@ -33,7 +33,9 @@ export default class CreateOngUsecase {
           user_id: createOngDto.user_id,
           city:response.data.municipio,
           telephone: response.data.telephone,
-          email_ong: response.data.email
+          email_ong: response.data.email,
+          maximum_pets: createOngDto.maximum_pets,
+          image:createOngDto.image
           
         })
       }

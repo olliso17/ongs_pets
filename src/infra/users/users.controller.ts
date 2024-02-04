@@ -18,9 +18,11 @@ import { FindByIdUserInputDto } from "./dto/active-user.dto";
 import FindAllUsersUsecase from "src/usecases/users/find.all.user.usecase";
 import EditPasswordUserUsecase from "src/usecases/users/edit.user.usecase";
 import { EditPasswordUserInputDto } from "./dto/edit-user.dto";
-import { LoginInputDto } from "src/infra/logins/dto/login.dto";
 import { LoginUsecase } from "src/usecases/login/login.usecase";
 import { AuthGuard, Public } from "../auth/auth.guard";
+import { ApiTags } from "@nestjs/swagger";
+
+@ApiTags('users')
 @Controller()
 export class UsersController {
   // constructor(private readonly usersService: UsersService) {}

@@ -20,8 +20,9 @@ import { FindByIdOngInputDto } from "./dto/active-ong.dto";
 import FindAllActiveOngsUsecase from "src/usecases/ongs/find.all.active.ong.usecase";
 import FindAllOngsUsecase from "src/usecases/ongs/find.all.ong.usecase copy";
 import { AuthGuard, Public } from "../auth/auth.guard";
+import { ApiTags } from "@nestjs/swagger";
 
-
+@ApiTags('ongs')
 @Controller()
 export class OngsController {
   constructor(
