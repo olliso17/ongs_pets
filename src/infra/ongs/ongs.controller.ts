@@ -20,7 +20,7 @@ import { FindByIdOngInputDto } from "./dto/active-ong.dto";
 import FindAllActiveOngsUsecase from "src/usecases/ongs/find.all.active.ong.usecase";
 import FindAllOngsUsecase from "src/usecases/ongs/find.all.ong.usecase copy";
 import { AuthGuard, Public } from "../auth/auth.guard";
-import { ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 
 @ApiTags('ongs')
 @Controller()
@@ -37,6 +37,7 @@ export class OngsController {
   
   @Post("ong/create") 
   @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   async create(@Body() createOngDto: CreateOngInputDto, @Req() req) {
     console.log('Received request:', req.body, req.headers);
     return await this.ongCreate.create(createOngDto);
@@ -55,6 +56,7 @@ export class OngsController {
   }
   @Patch("ong/activate/:id")
   @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   activate(@Param("id") id: string, @Body() updateOngDto: FindByIdOngInputDto) {
     return this.activeOng.execute(id, updateOngDto);
   }
@@ -66,12 +68,9 @@ export class OngsController {
 
   @Patch('ong/update/:id')
   @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   update(@Param('id') id: string, @Body() updateOngDto: UpdateOngInputDto) {
     return this.updateOng.execute(id, updateOngDto);
   }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.ongsService.remove(+id);
-  // }
 }

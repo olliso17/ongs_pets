@@ -20,7 +20,7 @@ import EditPasswordUserUsecase from "src/usecases/users/edit.user.usecase";
 import { EditPasswordUserInputDto } from "./dto/edit-user.dto";
 import { LoginUsecase } from "src/usecases/login/login.usecase";
 import { AuthGuard, Public } from "../auth/auth.guard";
-import { ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 
 @ApiTags('users')
 @Controller()
@@ -43,18 +43,21 @@ export class UsersController {
 
   @Get("users")
   @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   findAll() {
     return this.findAllUser.execute();
   }
 
   @Get("user/:id")
   @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   findOne(@Param("id") id: string) {
     return this.findUser.execute(id);
   }
 
   @Patch("user/activate/:id")
   @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   activate(@Param("id") id: string, @Body() updateUserDto: FindByIdUserInputDto) {
     return this.activateUser.update(id,updateUserDto);
   }

@@ -8,7 +8,7 @@ import { UpdatePetInputDto } from './dto/update-pet.dto';
 import { AuthGuard, Public } from '../auth/auth.guard';
 import { FindByIdPetInputDto } from './dto/active.pet.by.id';
 import ActivatePetUsecase from 'src/usecases/pets/activate.pet.usecase';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('pets')
 @Controller()
@@ -23,6 +23,7 @@ export class PetsController {
 
   @Post("pet/create")
   @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   create(@Body() createPetDto: CreatePetInputDto) {
     return this.createPet.create(createPetDto);
   }
@@ -40,11 +41,13 @@ export class PetsController {
   }
   @Patch("pet/activate/:id")
   @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   activate(@Param("id") id: string, @Body() updateOngDto: FindByIdPetInputDto) {
     return this.activeOng.execute(id, updateOngDto);
   }
   @Patch('pet/update/:id')
   @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   update(@Param('id') id: string, @Body() updatePetDto: UpdatePetInputDto) {
     return this.editPet.execute(id, updatePetDto);
   }

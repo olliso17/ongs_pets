@@ -12,6 +12,7 @@ async function bootstrap() {
     .addTag('login')
     .addTag('ongs')
     .addTag('pets')
+    .addBearerAuth({type:'http', scheme: 'bearer', bearerFormat:'Token'}, 'access-token')
     .addTag('donations')
     .build();
   const document = SwaggerModule.createDocument(app, config);

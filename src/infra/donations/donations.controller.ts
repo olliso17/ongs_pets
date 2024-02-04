@@ -8,26 +8,29 @@ import { EditDonationUsecase } from 'src/usecases/donations/edit.donation.usecas
 import { UpdateDonationInputDto } from './dto/update-donation.dto';
 import FindAllActiveDonationsUsecase from 'src/usecases/donations/find.all.active.donation.usecase';
 import FindDonationByIdUsecase from 'src/usecases/donations/find.by.donation.id';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+
 
 @ApiTags('donations')
 @Controller()
 export class DonationsController {
   constructor(
     private readonly createDonation: CreateDonationUsecase,
-    private readonly activateDonation:ActivateDonationUsecase,
-    private readonly updateDonation :EditDonationUsecase,
-    private readonly findAllActive:FindAllActiveDonationsUsecase,
-    private readonly findDonationById:FindDonationByIdUsecase
-    ) {}
+    private readonly activateDonation: ActivateDonationUsecase,
+    private readonly updateDonation: EditDonationUsecase,
+    private readonly findAllActive: FindAllActiveDonationsUsecase,
+    private readonly findDonationById: FindDonationByIdUsecase
+  ) { }
 
   @Post("donation/create")
   @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   create(@Body() createDonationDto: CreateDonationInputDto) {
     return this.createDonation.create(createDonationDto);
   }
   @Patch("donation/activate/:id")
   @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   activate(@Param("id") id: string, @Body() updateOngDto: FindByIdDonationInputDto) {
     return this.activateDonation.execute(id, updateOngDto);
   }
@@ -45,6 +48,7 @@ export class DonationsController {
 
   @Patch('donation/update/:id')
   @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   update(@Param('id') id: string, @Body() updatePetDto: UpdateDonationInputDto) {
     return this.updateDonation.execute(id, updatePetDto);
   }
