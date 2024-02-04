@@ -8,6 +8,7 @@ import {
   Delete,
   Inject,
   UseGuards,
+  Req,
 } from "@nestjs/common";
 import { CreateOngInputDto } from "./dto/create-ong.dto";
 import CreateOngUsecase from "src/usecases/ongs/create.ong.usecase";
@@ -32,10 +33,11 @@ export class OngsController {
     private readonly findAllActive: FindAllActiveOngsUsecase
     // @Inject("AxiosInstance") private readonly axios,
   ) { }
-  @Public()
+  
   @Post("ong/create") 
-  async create(@Body() createOngDto: CreateOngInputDto) {
-
+  @UseGuards(AuthGuard)
+  async create(@Body() createOngDto: CreateOngInputDto, @Req() req) {
+    console.log('Received request:', req.body, req.headers);
     return await this.ongCreate.create(createOngDto);
 
   }

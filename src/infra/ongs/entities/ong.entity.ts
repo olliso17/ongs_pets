@@ -65,7 +65,7 @@ export default class Ong extends Base {
   @JoinColumn({ name: "user_id" })
   user: User;
 
-  @Column({ type: "varchar", length: 300 })
+  @Column({ type: "varchar", length: 300,  default: "" })
   telephone: string;
 
   @Column({ type: "integer", default: 0 })

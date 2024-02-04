@@ -8,6 +8,7 @@ import { UserRepository } from "src/infra/users/user.repository";
 const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");
 const os = require("os");
+const jwt = require('jsonwebtoken');
 dotenv.config();
 @Injectable()
 export default class CreateUseUsecase {
@@ -22,14 +23,18 @@ export default class CreateUseUsecase {
   ): Promise<CreateUserOutputDto> {
     const networkInfo = os.networkInterfaces();
     const salt = process.env.SALT;
-    const token = bcrypt.hashSync(
-      createUserDto.email + createUserDto.password + "token",
-      salt,
-    );
+   
     createUserDto.email = bcrypt.hashSync(createUserDto.email, salt);
     createUserDto.name = bcrypt.hashSync(createUserDto.name, salt);
     createUserDto.password = bcrypt.hashSync(createUserDto.password, salt);
     const user = new User(createUserDto);
+    const options = {
+      expiresIn: '3h',
+    };
+    const token = jwt.sign(
+      {nome:createUserDto.email},
+      salt,options
+    );
 
     try {
       const create_user = await this.usersRepository.create(user);
@@ -39,7 +44,8 @@ export default class CreateUseUsecase {
         localhost: networkInfo.lo[0].address,
       });
       await this.loginRepository.createLogin(login);
-      return { message: "user created successfully" };
+      
+      return { message: "user created successfully." + token};
     } catch (err) {
       return { message: "credentials invalid" };
     }

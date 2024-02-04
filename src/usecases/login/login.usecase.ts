@@ -8,6 +8,7 @@ import { LoginRepository } from "src/infra/logins/login.repository";
 
 const dotenv = require("dotenv");
 const os = require("os");
+const jwt = require('jsonwebtoken');
 dotenv.config();
 @Injectable()
 export class LoginUsecase {
@@ -33,7 +34,13 @@ export class LoginUsecase {
       throw new UnauthorizedException("Credentials invalid");
     }
 
-    const token = bcrypt.hashSync(`${isUser.id}${uuidv4()}`, salt);
+    const options = {
+      expiresIn: '3h',
+    };
+    const token = jwt.sign(
+      {nome:hashedEmail},
+      salt,options
+    );
 
    
     const login = new Login({

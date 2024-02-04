@@ -17,30 +17,39 @@ export default class CreateOngUsecase {
       "https://www.receitaws.com.br/v1/cnpj/" + createOngDto.cnpj,
     );
 
-    if(response.data.staus === "ERROR" ||response.data.message === "CNPJ invalido"){
-      return {message:"CNPJ is invalid"}
-    }
-    if (response.data.situacao === "ATIVA") {
-      Object.assign(ong,createOngDto);
-      Object.assign(ong, response.data)
-    } 
-
-
-    if (
-      response.data.situacao === "INATIVA" ||
-      response.data.situacao === "NULA" ||
-      response.data.situacao === "INAPTA" ||
-      response.data.situacao === "SUSPENSA" ||
-      response.data.situacao === "BAIXADA"
-    ) {
-      return { message: "Cnpj not active" };
-    }
-    
     try {
+      if (response.data.staus === "ERROR" || response.data.message === "CNPJ invalido") {
+        return { message: "CNPJ is invalid" }
+      }
+      if (response.data.situacao === "ATIVA") {
+        ong = new Ong({
+          name: response.data.nome,
+          cnpj: createOngDto.cnpj,
+          address: response.data.logradouro,
+          neighborhood: response.data.bairro,
+          state: response.data.uf,
+          number_address: response.data.numero,
+          cep: response.data.cep,
+          user_id: createOngDto.user_id,
+          city:response.data.municipio,
+          telephone: response.data.telephone,
+          email_ong: response.data.email
+          
+        })
+      }
+
+      if (
+        ["INATIVA", "NULA", "INAPTA", "SUSPENSA", "BAIXADA"].includes(response.data.situacao)
+      ) {
+        return { message: "Cnpj not active" };
+      }
+
+
+
       await this.ongsRepository.create(ong);
       return ong;
     } catch (err) {
-      return  {message:err.message};
+      return response.data;
     }
   }
 }
