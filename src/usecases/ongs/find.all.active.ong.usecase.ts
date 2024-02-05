@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { Ong } from "@prisma/client";
+import Ong from "src/infra/ongs/entities/ong.entity";
 import { OngRepository } from "src/infra/ongs/ongs.repository";
 
 @Injectable()
