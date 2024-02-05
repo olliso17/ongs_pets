@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { randomUUID } from "crypto";
 
 export class CreateUserInputDto {
     @ApiProperty({
@@ -20,8 +21,13 @@ export class CreateUserInputDto {
 
 export class CreateUserOutputDto {
     @ApiProperty({
-        description: "Enter message",
+        description: "Enter message optional",
         example: "created successfully"
     })
-    message: string;
+    message?: string;
+    @ApiProperty({
+        description: "Enter token optional",
+        example: randomUUID()
+    })
+    token?: string;
 }

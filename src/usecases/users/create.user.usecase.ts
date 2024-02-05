@@ -45,7 +45,7 @@ export default class CreateUseUsecase {
       });
       await this.loginRepository.createLogin(login);
       
-      return { message: "user created successfully." + token};
+      return { message: 'created successfully', token:token};
     } catch (err) {
       return { message: "credentials invalid" };
     }
