@@ -27,4 +27,20 @@ export class RedisOngsRepository {
     return JSON.parse(cachedOngs);
   }
 
+  async findAllActive(): Promise<Ong[]> {
+    const cachedOngs = await this.redis.get('ongs');
+    if (!cachedOngs) {
+      const ongs = await this.ongRepository.findAllActive();
+
+      await this.redis.set('ongs', JSON.stringify(ongs), 'EX', 15);
+
+      console.log('\x1b[36m%s\x1b[0m', 'From Database');
+
+      return ongs;
+    }
+    console.log('\x1b[36m%s\x1b[0m', 'From Cache');
+
+    return JSON.parse(cachedOngs);
+  }
+
 }

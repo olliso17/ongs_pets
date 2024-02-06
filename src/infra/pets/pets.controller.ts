@@ -10,7 +10,7 @@ import { FindByIdPetInputDto } from './dto/active.pet.by.id';
 import ActivatePetUsecase from 'src/usecases/pets/activate.pet.usecase';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
-@ApiTags('pets')
+@ApiTags()
 @Controller()
 export class PetsController {
   constructor(

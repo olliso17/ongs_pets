@@ -8,13 +8,15 @@ import FindPetByIdUsecase from 'src/usecases/pets/find.by.pet.id';
 import FindAllActivePetsUsecase from 'src/usecases/pets/find.all.active.pet.usecase';
 import { EditPetUsecase } from 'src/usecases/pets/edit.pet.usecase';
 import ActivatePetUsecase from 'src/usecases/pets/activate.pet.usecase';
+import { RedisPetsRepository } from '../cache/redis-pets-repository';
+import { RedisService } from 'src/redis';
 
 
 @Module({
   imports: [TypeOrmModule.forFeature([Pet])],
   controllers: [PetsController],
   providers: [
-    CreatePetUsecase, PetRepository, FindPetByIdUsecase, FindAllActivePetsUsecase, EditPetUsecase, ActivatePetUsecase
+    CreatePetUsecase, PetRepository, FindPetByIdUsecase, FindAllActivePetsUsecase, EditPetUsecase, ActivatePetUsecase, RedisPetsRepository, RedisService
   ],
 })
 export class PetsModule { }
