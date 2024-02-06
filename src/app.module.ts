@@ -8,6 +8,8 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { dataSourceOptions } from "db/data-source";
 import { UsersModule } from "./infra/users/users.module";
 import { AuthModule } from './infra/auth/auth.module';
+import { RedisService } from "./redis";
+import { RedisOngsRepository } from "./infra/cache/redis-ongs-repository";
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -21,6 +23,6 @@ dotenv.config();
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, RedisService, RedisOngsRepository],
 })
 export class AppModule { }
