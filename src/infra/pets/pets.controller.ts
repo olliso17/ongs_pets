@@ -23,7 +23,7 @@ export class PetsController {
 
   @Post("pet/create")
   @UseGuards(AuthGuard)
-  @ApiBearerAuth()
+   @ApiBearerAuth('JWT-auth')
   create(@Body() createPetDto: CreatePetInputDto) {
     return this.createPet.create(createPetDto);
   }
@@ -41,13 +41,13 @@ export class PetsController {
   }
   @Patch("pet/activate/:id")
   @UseGuards(AuthGuard)
-  @ApiBearerAuth()
+   @ApiBearerAuth('JWT-auth')
   activate(@Param("id") id: string, @Body() updateOngDto: FindByIdPetInputDto) {
     return this.activeOng.execute(id, updateOngDto);
   }
   @Patch('pet/update/:id')
   @UseGuards(AuthGuard)
-  @ApiBearerAuth()
+   @ApiBearerAuth('JWT-auth')
   update(@Param('id') id: string, @Body() updatePetDto: UpdatePetInputDto) {
     return this.editPet.execute(id, updatePetDto);
   }

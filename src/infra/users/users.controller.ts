@@ -43,21 +43,21 @@ export class UsersController {
 
   @Get("users")
   @UseGuards(AuthGuard)
-  @ApiBearerAuth()
+   @ApiBearerAuth('JWT-auth')
   findAll() {
     return this.findAllUser.execute();
   }
 
   @Get("user/:id")
   @UseGuards(AuthGuard)
-  @ApiBearerAuth()
+   @ApiBearerAuth('JWT-auth')
   findOne(@Param("id") id: string) {
     return this.findUser.execute(id);
   }
 
   @Patch("user/activate/:id")
   @UseGuards(AuthGuard)
-  @ApiBearerAuth()
+   @ApiBearerAuth('JWT-auth')
   activate(@Param("id") id: string, @Body() updateUserDto: FindByIdUserInputDto) {
     return this.activateUser.update(id,updateUserDto);
   }

@@ -24,13 +24,13 @@ export class DonationsController {
 
   @Post("donation/create")
   @UseGuards(AuthGuard)
-  @ApiBearerAuth()
+   @ApiBearerAuth('JWT-auth')
   create(@Body() createDonationDto: CreateDonationInputDto) {
     return this.createDonation.create(createDonationDto);
   }
   @Patch("donation/activate/:id")
   @UseGuards(AuthGuard)
-  @ApiBearerAuth()
+   @ApiBearerAuth('JWT-auth')
   activate(@Param("id") id: string, @Body() updateOngDto: FindByIdDonationInputDto) {
     return this.activateDonation.execute(id, updateOngDto);
   }
@@ -48,7 +48,7 @@ export class DonationsController {
 
   @Patch('donation/update/:id')
   @UseGuards(AuthGuard)
-  @ApiBearerAuth()
+   @ApiBearerAuth('JWT-auth')
   update(@Param('id') id: string, @Body() updatePetDto: UpdateDonationInputDto) {
     return this.updateDonation.execute(id, updatePetDto);
   }

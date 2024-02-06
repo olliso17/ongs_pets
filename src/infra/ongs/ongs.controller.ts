@@ -34,10 +34,10 @@ export class OngsController {
     private readonly findAllActive: FindAllActiveOngsUsecase
     // @Inject("AxiosInstance") private readonly axios,
   ) { }
-  
-  @Post("ong/create") 
+
+  @Post("ong/create")
   @UseGuards(AuthGuard)
-  @ApiBearerAuth()
+  @ApiBearerAuth('JWT-auth')
   async create(@Body() createOngDto: CreateOngInputDto, @Req() req) {
     console.log('Received request:', req.body, req.headers);
     return await this.ongCreate.create(createOngDto);
@@ -56,7 +56,7 @@ export class OngsController {
   }
   @Patch("ong/activate/:id")
   @UseGuards(AuthGuard)
-  @ApiBearerAuth()
+  @ApiBearerAuth('JWT-auth')
   activate(@Param("id") id: string, @Body() updateOngDto: FindByIdOngInputDto) {
     return this.activeOng.execute(id, updateOngDto);
   }
@@ -68,7 +68,7 @@ export class OngsController {
 
   @Patch('ong/update/:id')
   @UseGuards(AuthGuard)
-  @ApiBearerAuth()
+  @ApiBearerAuth('JWT-auth')
   update(@Param('id') id: string, @Body() updateOngDto: UpdateOngInputDto) {
     return this.updateOng.execute(id, updateOngDto);
   }
