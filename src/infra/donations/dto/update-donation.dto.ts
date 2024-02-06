@@ -1,9 +1,11 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { IsString } from "class-validator";
 
 export class UpdateDonationInputDto {
-    @ApiProperty({
-        description:"Donation description",
-        example: "Do I need dog food?"
-    })
-    description:string
+  @IsString()
+  @ApiProperty({
+    description: "Donation description",
+    example: "Do I need dog food?",
+  })
+  description: string;
 }

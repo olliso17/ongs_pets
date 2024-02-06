@@ -1,9 +1,11 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { IsBoolean } from "class-validator";
 
 export class FindByIdOngInputDto {
-    @ApiProperty({
-        description:"Activate or deactivate depending on the value, true or false",
-        example:false
-    })
-    active:boolean
+  @IsBoolean()
+  @ApiProperty({
+    description: "Activate or deactivate depending on the value, true or false",
+    example: false,
+  })
+  active: boolean;
 }
