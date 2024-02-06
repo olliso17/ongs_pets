@@ -27,7 +27,4 @@ export class RedisOngsRepository {
     return JSON.parse(cachedOngs);
   }
 
-  findAllActive(): Promise<Ong[]> {
-    throw new Error("Method not implemented.");
-  }
 }

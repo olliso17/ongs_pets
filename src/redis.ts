@@ -4,7 +4,7 @@ import { Redis } from "ioredis";
 @Injectable()
 export class RedisService extends Redis {
     constructor() {
-        super();
+        super({password:'12345'});
         super.on('error', (err) => {
             console.log('Error on Redis');
             console.log(err);

@@ -23,6 +23,6 @@ dotenv.config();
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService, RedisService, RedisOngsRepository],
+  providers: [AppService],
 })
 export class AppModule { }

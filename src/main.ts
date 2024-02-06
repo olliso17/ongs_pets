@@ -4,9 +4,7 @@ import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { NestMicroserviceOptions } from "@nestjs/common/interfaces/microservices/nest-microservice-options.interface";
 
 async function bootstrap() {
-  const app = await NestFactory.createMicroservice<NestMicroserviceOptions>(
-    AppModule
-  );
+  const app = await NestFactory.create(AppModule);
   const config = new DocumentBuilder()
     .setTitle("ONGs and Pets")
     .setDescription(
