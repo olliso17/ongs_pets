@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { RedisService } from "src/redis";
+import { RedisService } from "../../redis";
 import { DonationRepository } from "../donations/donation.repository";
 import { Donation } from "../donations/entities/donation.entity";
 

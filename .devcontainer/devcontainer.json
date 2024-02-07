@@ -22,7 +22,8 @@
         "alefragnani.project-manager",
         "aaron-bond.better-comments",
         "NuclleaR.vscode-extension-auto-import",
-        "vscode-icons-team.vscode-icons"
+        "vscode-icons-team.vscode-icons",
+        "steoates.autoimport"
       ],
       "editor.defaultFormatter": "esbenp.prettier-vscode",
       "editor.wordWrap": "on",

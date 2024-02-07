@@ -1,6 +1,7 @@
-import { Base } from "src/infra/bases/entities/base.entity";
-import Ong from "src/infra/ongs/entities/ong.entity";
+
 import { Column, Entity, Index, JoinColumn, ManyToOne } from "typeorm";
+import { Base } from "../../bases/entities/base.entity";
+import Ong from "../../ongs/entities/ong.entity";
 
 type DonationProps = {
   ong_id: string;
@@ -9,7 +10,7 @@ type DonationProps = {
 
 @Entity()
 @Index("idx_ong_id_in_donation", ["ong"])
-export class Donation extends Base {
+export class Donation extends Base{
   @Column({ type: "varchar" })
   ong_id: string;
 

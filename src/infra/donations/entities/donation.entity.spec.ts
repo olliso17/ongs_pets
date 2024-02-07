@@ -1,10 +1,10 @@
 import { randomUUID } from "crypto";
-import { DonationEntity } from "./donation.entity";
+import { Donation } from "./donation.entity";
 
-describe("DonationEntity", () => {
+describe("Donation", () => {
   it("should throw error when ong id is empty", () => {
     expect(() => {
-      new DonationEntity({
+      new Donation({
         ong_id: "",
         description: "idosinho dengoso",
       });
@@ -12,7 +12,7 @@ describe("DonationEntity", () => {
   });
   it("should throw error when ong id is blank", () => {
     expect(() => {
-      new DonationEntity({
+      new Donation({
         ong_id: "  ",
         description: "idosinho dengoso",
       });
@@ -20,7 +20,7 @@ describe("DonationEntity", () => {
   });
   it("should throw error when ong id is null", () => {
     expect(() => {
-      new DonationEntity({
+      new Donation({
         ong_id: null,
         description: "idosinho dengoso",
       });
@@ -28,7 +28,7 @@ describe("DonationEntity", () => {
   });
   it("should throw error when description is empty", () => {
     expect(() => {
-      new DonationEntity({
+      new Donation({
         ong_id: randomUUID(),
         description: "",
       });
@@ -36,7 +36,7 @@ describe("DonationEntity", () => {
   });
   it("should throw error when description is blank", () => {
     expect(() => {
-      new DonationEntity({
+      new Donation({
         ong_id: randomUUID(),
         description: "  ",
       });
@@ -44,7 +44,7 @@ describe("DonationEntity", () => {
   });
   it("should throw error when description is null", () => {
     expect(() => {
-      new DonationEntity({
+      new Donation({
         ong_id: randomUUID(),
         description: null,
       });

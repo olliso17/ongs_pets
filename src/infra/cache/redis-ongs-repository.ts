@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
+import { RedisService } from "../../redis";
+import { OngRepository } from "../ongs/ongs.repository";
 import Ong from "../ongs/entities/ong.entity";
-import { RedisService } from "src/redis";
-import { OngRepository } from 'src/infra/ongs/ongs.repository';
 
 @Injectable()
 export class RedisOngsRepository {

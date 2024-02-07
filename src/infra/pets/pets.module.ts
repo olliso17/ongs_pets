@@ -10,13 +10,14 @@ import { EditPetUsecase } from 'src/usecases/pets/edit.pet.usecase';
 import ActivatePetUsecase from 'src/usecases/pets/activate.pet.usecase';
 import { RedisPetsRepository } from '../cache/redis-pets-repository';
 import { RedisService } from 'src/redis';
+import { AuthGuard } from '../auth/auth.guard';
 
 
 @Module({
   imports: [TypeOrmModule.forFeature([Pet])],
   controllers: [PetsController],
   providers: [
-    CreatePetUsecase, PetRepository, FindPetByIdUsecase, FindAllActivePetsUsecase, EditPetUsecase, ActivatePetUsecase, RedisPetsRepository, RedisService
+    CreatePetUsecase, PetRepository, FindPetByIdUsecase, FindAllActivePetsUsecase, EditPetUsecase, ActivatePetUsecase, RedisPetsRepository, RedisService, AuthGuard, 
   ],
 })
 export class PetsModule { }
