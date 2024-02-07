@@ -1,8 +1,8 @@
 import { Body, Controller, Post, HttpCode, HttpStatus } from '@nestjs/common';
-import { LoginUsecase } from 'src/usecases/login/login.usecase';
 import { LoginInputDto } from '../logins/dto/login.dto';
 import { Public } from './auth.guard';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { LoginUsecase } from '../../usecases/login/login.usecase';
 
 @ApiTags('login')
 @Controller('auth')
