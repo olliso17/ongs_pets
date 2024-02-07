@@ -7,6 +7,8 @@ import { EditOngUsecase } from '../../usecases/ongs/edit.ong.usecase';
 import CreateOngUsecase from '../../usecases/ongs/create.ong.usecase';
 import ActivateOngUsecase from '../../usecases/ongs/activate.ong.usecase';
 import FindAllActiveOngsUsecase from '../../usecases/ongs/find.all.active.ong.usecase';
+import FindAllStateOngsUsecase from '../../usecases/ongs/find.all.ongs.state.usecase';
+import FindAllCityOngsUsecase from '../../usecases/ongs/find.all.ongs.city.usecase';
 describe('OngsController', () => {
   let controller: OngsController;
   let ongRepository: OngRepository;
@@ -17,6 +19,9 @@ describe('OngsController', () => {
   let activateOngUsecase: ActivateOngUsecase;
   let editOngUsecase: EditOngUsecase;
   let findOngByIdUsecase: FindOngByIdUsecase;
+  let findAllStateOngsUsecase: FindAllStateOngsUsecase;
+  let findAllCityOngsUsecase: FindAllCityOngsUsecase;
+
 
   beforeEach(() => {
     const typeOrmMock: any = {};
@@ -28,7 +33,9 @@ describe('OngsController', () => {
     activateOngUsecase = new ActivateOngUsecase(ongRepository);
     editOngUsecase = new EditOngUsecase(ongRepository);
     findOngByIdUsecase = new FindOngByIdUsecase(ongRepository);
-    controller = new OngsController(createOngUsecase, findOngByIdUsecase, editOngUsecase, activateOngUsecase, findAllOngsUsecase, findAllActiveOngsUsecase)
+    findAllStateOngsUsecase = new FindAllStateOngsUsecase(ongRepository);
+    findAllCityOngsUsecase = new FindAllCityOngsUsecase(ongRepository);
+    controller = new OngsController(createOngUsecase, findOngByIdUsecase, editOngUsecase, activateOngUsecase, findAllOngsUsecase, findAllActiveOngsUsecase, findAllStateOngsUsecase, findAllCityOngsUsecase)
   });
 
   it('should be defined', () => {

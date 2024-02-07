@@ -5,7 +5,12 @@
 
 ## Description
 
-Project Ong and Pets.
+Ong and Pets Project Its objective is to facilitate the search for NGOs in your location.
+
+
+## Swagger
+#dev
+http://localhost:3000/api
 
 ## Installation
 
@@ -38,3 +43,7 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+## Stay in touch
+
+- Author - [Patricia Oliveira](https://www.linkedin.com/in/patricia-silva-oliveira-/)

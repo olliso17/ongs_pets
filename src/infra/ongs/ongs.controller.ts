@@ -19,6 +19,10 @@ import { AuthGuard, Public } from "../auth/auth.guard";
 import { CreateOngInputDto } from "./dto/create-ong.dto";
 import { FindByIdOngInputDto } from "./dto/active-ong.dto";
 import { UpdateOngInputDto } from "./dto/update-ong.dto";
+import FindAllStateOngsUsecase from "../../usecases/ongs/find.all.ongs.state.usecase";
+import { FindAllOngStateDto } from "./dto/find.all.ong.state.dto";
+import { FindAllOngCityDto } from "./dto/find.all.ong.city.dto";
+import FindAllCityOngsUsecase from "../../usecases/ongs/find.all.ongs.city.usecase";
 
 @ApiTags('ongs')
 @Controller()
@@ -29,8 +33,9 @@ export class OngsController {
     private readonly updateOng: EditOngUsecase,
     private readonly activeOng: ActivateOngUsecase,
     private readonly findAll: FindAllOngsUsecase,
-    private readonly findAllActive: FindAllActiveOngsUsecase
-    // @Inject("AxiosInstance") private readonly axios,
+    private readonly findAllActive: FindAllActiveOngsUsecase,
+    private readonly findAllState: FindAllStateOngsUsecase,
+    private readonly findAllCity: FindAllCityOngsUsecase
   ) { }
 
   @Post("ong/create")
@@ -51,6 +56,16 @@ export class OngsController {
   @Get("ongs/active")
   findAllOngActive() {
     return this.findAllActive.execute();
+  }
+  @Public()
+  @Get("ongs/:state")
+  findAllOngState(@Param("state") findAllState: FindAllOngStateDto) {
+    return this.findAllState.execute(findAllState);
+  }
+  @Public()
+  @Get("ongs/:city")
+  findAllOngCity(@Param("city") findAllCity: FindAllOngCityDto) {
+    return this.findAllCity.execute(findAllCity);
   }
   @Patch("ong/activate/:id")
   @UseGuards(AuthGuard)

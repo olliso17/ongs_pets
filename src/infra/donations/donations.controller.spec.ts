@@ -21,7 +21,7 @@ describe('DonationsController', () => {
     createDonationUsecase = new CreateDonationUsecase(donationRepository);
     findDonationByIdUsecase = new FindDonationByIdUsecase(donationRepository);
     findAllActiveDonationsUsecase = new FindAllActiveDonationsUsecase(donationRepository);
-    controller = new DonationsController(createDonationUsecase, activateDonationUsecase, editDonationUsecase, findAllActiveDonationsUsecase, findDonationByIdUsecase)
+    controller = new DonationsController(createDonationUsecase, activateDonationUsecase, editDonationUsecase, findAllActiveDonationsUsecase, findDonationByIdUsecase, )
   });
   it('should be defined', () => {
     expect(controller).toBeDefined();

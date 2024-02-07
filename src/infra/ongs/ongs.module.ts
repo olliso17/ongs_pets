@@ -13,6 +13,8 @@ import { AuthGuard } from "../auth/auth.guard";
 import { RedisOngsRepository } from "../cache/redis-ongs-repository";
 import { RedisService } from "../../redis";
 import axios from "axios";
+import FindAllStateOngsUsecase from "../../usecases/ongs/find.all.ongs.state.usecase";
+import FindAllCityOngsUsecase from "../../usecases/ongs/find.all.ongs.city.usecase";
 
 @Module({
   imports: [TypeOrmModule.forFeature([Ong])],
@@ -25,6 +27,8 @@ import axios from "axios";
     ActivateOngUsecase,
     FindAllOngsUsecase,
     FindAllActiveOngsUsecase,
+    FindAllStateOngsUsecase,
+    FindAllCityOngsUsecase,
     AuthGuard,
     RedisOngsRepository,
     RedisService,

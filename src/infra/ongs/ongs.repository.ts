@@ -29,7 +29,36 @@ export class OngRepository {
   }
   async findAllActive(): Promise<Ong[]> {
     const ongs = await this.typeOrm.find({ where: { active: true }, relations: ["pets", "donations"] });
-    return ongs;
+    const filteredOngs = ongs.map((ong) => {
+      ong.pets = ong.pets.filter((pet) => {pet.active === true && pet.to_adopt === false});
+      ong.donations = ong.donations.filter((donation) => donation.active === true);
+      
+      return ong;
+    });
+  
+    return filteredOngs;
+  }
+  async findAllState(state:string): Promise<Ong[]> {
+    const ongs = await this.typeOrm.find({ where: { state: state , active:true}, relations: ["pets", "donations"] });
+    const filteredOngs = ongs.map((ong) => {
+      ong.pets = ong.pets.filter((pet) => {pet.active === true && pet.to_adopt === false});
+      ong.donations = ong.donations.filter((donation) => donation.active === true);
+      
+      return ong;
+    });
+  
+    return filteredOngs;
+  }
+  async findAllCity(city:string): Promise<Ong[]> {
+    const ongs = await this.typeOrm.find({ where: { city: city , active:true}, relations: ["pets", "donations"] });
+    const filteredOngs = ongs.map((ong) => {
+      ong.pets = ong.pets.filter((pet) => {pet.active === true && pet.to_adopt === false});
+      ong.donations = ong.donations.filter((donation) => donation.active === true);
+      
+      return ong;
+    });
+  
+    return filteredOngs;
   }
   async update(updateOngDto: UpdateOngInputDto): Promise<Ong> {
     const new_ong = await this.typeOrm.save(updateOngDto);
