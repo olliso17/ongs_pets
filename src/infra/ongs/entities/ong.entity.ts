@@ -1,7 +1,4 @@
-import { Base } from "src/infra/bases/entities/base.entity";
-import { Donation } from "src/infra/donations/entities/donation.entity";
-import { Pet } from "src/infra/pets/entities/pet.entity";
-import User from "src/infra/users/entities/user.entity";
+
 import {
   Column,
   Entity,
@@ -10,6 +7,10 @@ import {
   ManyToOne,
   OneToMany,
 } from "typeorm";
+import { Pet } from "../../pets/entities/pet.entity";
+import { Base } from "../../bases/entities/base.entity";
+import User from "../../users/entities/user.entity";
+import { Donation } from "../../donations/entities/donation.entity";
 
 type OngProps = {
   name?: string;

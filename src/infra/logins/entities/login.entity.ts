@@ -1,6 +1,7 @@
-import { Base } from "src/infra/bases/entities/base.entity";
-import User from "src/infra/users/entities/user.entity";
+
 import { Column, Entity, Index, JoinColumn, ManyToOne } from "typeorm";
+import { Base } from "../../bases/entities/base.entity";
+import User from "../../users/entities/user.entity";
 
 type LoginProps = {
   token: string;

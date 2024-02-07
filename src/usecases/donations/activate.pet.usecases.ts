@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
-import { DonationRepository } from "src/infra/donations/donation.repository";
-import { FindByIdDonationInputDto } from "src/infra/donations/dto/active.donation.by.id";
-import { Donation } from "src/infra/donations/entities/donation.entity";
-import { MessageErrorDto } from "src/infra/ongs/dto/create-ong.dto";
+import { DonationRepository } from "../../infra/donations/donation.repository";
+import { FindByIdDonationInputDto } from "../../infra/donations/dto/active.donation.by.id";
+import { Donation } from "../../infra/donations/entities/donation.entity";
+import { MessageErrorDto } from "../../infra/ongs/dto/create-ong.dto";
 
 @Injectable()
 export default class ActivateDonationUsecase {

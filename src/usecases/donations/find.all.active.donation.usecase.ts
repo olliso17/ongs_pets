@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
-import { DonationRepository } from "src/infra/donations/donation.repository";
-import { Donation } from "src/infra/donations/entities/donation.entity";
+import { DonationRepository } from "../../infra/donations/donation.repository";
+import { Donation } from "../../infra/donations/entities/donation.entity";
 
 @Injectable()
 export default class FindAllActiveDonationsUsecase {

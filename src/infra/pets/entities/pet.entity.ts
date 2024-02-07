@@ -1,6 +1,7 @@
-import { Base } from "src/infra/bases/entities/base.entity";
-import Ong from "src/infra/ongs/entities/ong.entity";
+
 import { Column, Entity, Index, JoinColumn, ManyToOne } from "typeorm";
+import { Base } from "../../bases/entities/base.entity";
+import Ong from "../../ongs/entities/ong.entity";
 
 type PetProps = {
   name: string;
