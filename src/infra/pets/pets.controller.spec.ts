@@ -1,4 +1,3 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { PetsController } from './pets.controller';
 import CreatePetUsecase from '../../usecases/pets/create.pet.usecase';
 import { PetRepository } from './pets.repository';
