@@ -27,6 +27,5 @@ export class Login extends Base {
   constructor(props: LoginProps) {
     super();
     Object.assign(this, props);
-    // this.validationLogin();
   }
 }
