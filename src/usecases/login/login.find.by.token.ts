@@ -1,6 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { LoginRepository } from "src/infra/logins/login.repository";
-import { UserRepository } from "src/infra/users/user.repository";
+import { LoginRepository } from "../../infra/logins/login.repository";
 
 @Injectable()
 export default class FindLoginByIdUsecase{

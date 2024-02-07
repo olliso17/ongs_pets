@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
-import { Pet } from "src/infra/pets/entities/pet.entity";
-import { PetRepository } from "src/infra/pets/pets.repository";
+import { PetRepository } from "../../infra/pets/pets.repository";
+import { Pet } from "../../infra/pets/entities/pet.entity";
 
 @Injectable()
 export default class FindAllActivePetsUsecase {

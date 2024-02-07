@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersController } from './users.controller';
-import CreateUseUsecase from 'src/usecases/users/create.user.usecase';
+import CreateUseUsecase from '../../usecases/users/create.user.usecase';
 
 describe('UsersController', () => {
   let controller: UsersController;

@@ -1,14 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
-import CreatePetUsecase from 'src/usecases/pets/create.pet.usecase';
-import { CreatePetInputDto } from './dto/create-pet.dto';
-import FindPetByIdUsecase from 'src/usecases/pets/find.by.pet.id';
-import FindAllActivePetsUsecase from 'src/usecases/pets/find.all.active.pet.usecase';
-import { EditPetUsecase } from 'src/usecases/pets/edit.pet.usecase';
-import { UpdatePetInputDto } from './dto/update-pet.dto';
-import { AuthGuard, Public } from '../auth/auth.guard';
-import { FindByIdPetInputDto } from './dto/active.pet.by.id';
-import ActivatePetUsecase from 'src/usecases/pets/activate.pet.usecase';
+import { Controller, Get, Post, Body, Patch, Param, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import CreatePetUsecase from '../../usecases/pets/create.pet.usecase';
+import FindPetByIdUsecase from '../../usecases/pets/find.by.pet.id';
+import FindAllActivePetsUsecase from '../../usecases/pets/find.all.active.pet.usecase';
+import { EditPetUsecase } from '../../usecases/pets/edit.pet.usecase';
+import ActivatePetUsecase from '../../usecases/pets/activate.pet.usecase';
+import { AuthGuard, Public } from '../auth/auth.guard';
+import { CreatePetInputDto } from './dto/create-pet.dto';
+import { FindByIdPetInputDto } from './dto/active.pet.by.id';
+import { UpdatePetInputDto } from './dto/update-pet.dto';
 
 @ApiTags()
 @Controller()

@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { OngsController } from './ongs.controller';
-import CreateOngUsecase from 'src/usecases/ongs/create.ong.usecase';
-import FindOngByIdUsecase from 'src/usecases/ongs/find.by.ong.id';
-import { EditOngUsecase } from 'src/usecases/ongs/edit.ong.usecase';
+import CreateOngUsecase from '../../usecases/ongs/create.ong.usecase';
+import { EditOngUsecase } from '../../usecases/ongs/edit.ong.usecase';
+import FindOngByIdUsecase from '../../usecases/ongs/find.by.ong.id';
 describe('OngsController', () => {
   let controller: OngsController;
 

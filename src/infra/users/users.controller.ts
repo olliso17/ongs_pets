@@ -10,17 +10,17 @@ import {
   ForbiddenException,
   Req,
 } from "@nestjs/common";
-import { CreateUserInputDto } from "./dto/create-user.dto";
-import CreateUseUsecase from "src/usecases/users/create.user.usecase";
-import FindUserByIdUsecase from "src/usecases/users/find.by.user.id";
-import ActivateUseUsecase from "src/usecases/users/activate.user.usecase";
-import { FindByIdUserInputDto } from "./dto/active-user.dto";
-import FindAllUsersUsecase from "src/usecases/users/find.all.user.usecase";
-import EditPasswordUserUsecase from "src/usecases/users/edit.user.usecase";
-import { EditPasswordUserInputDto } from "./dto/edit-user.dto";
-import { LoginUsecase } from "src/usecases/login/login.usecase";
-import { AuthGuard, Public } from "../auth/auth.guard";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import CreateUseUsecase from "../../usecases/users/create.user.usecase";
+import FindUserByIdUsecase from "../../usecases/users/find.by.user.id";
+import FindAllUsersUsecase from "../../usecases/users/find.all.user.usecase";
+import ActivateUseUsecase from "../../usecases/users/activate.user.usecase";
+import EditPasswordUserUsecase from "../../usecases/users/edit.user.usecase";
+import { LoginUsecase } from "../../usecases/login/login.usecase";
+import { AuthGuard, Public } from "../auth/auth.guard";
+import { CreateUserInputDto } from "./dto/create-user.dto";
+import { FindByIdUserInputDto } from "./dto/active-user.dto";
+import { EditPasswordUserInputDto } from "./dto/edit-user.dto";
 
 @ApiTags('users')
 @Controller()

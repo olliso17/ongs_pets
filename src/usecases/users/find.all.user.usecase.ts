@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
-import User from "src/infra/users/entities/user.entity";
-import { UserRepository } from "src/infra/users/user.repository";
+import { UserRepository } from "../../infra/users/user.repository";
+import User from "../../infra/users/entities/user.entity";
 
 @Injectable()
 export default class FindAllUsersUsecase {

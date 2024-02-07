@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
-import { FindByIdOngInputDto } from "src/infra/ongs/dto/active-ong.dto";
-import { MessageErrorDto } from "src/infra/ongs/dto/create-ong.dto";
-import Ong from "src/infra/ongs/entities/ong.entity";
-import { OngRepository } from "src/infra/ongs/ongs.repository";
+import { OngRepository } from "../../infra/ongs/ongs.repository";
+import { FindByIdOngInputDto } from "../../infra/ongs/dto/active-ong.dto";
+import { MessageErrorDto } from "../../infra/ongs/dto/create-ong.dto";
+import Ong from "../../infra/ongs/entities/ong.entity";
 
 @Injectable()
 export default class ActivateOngUsecase {

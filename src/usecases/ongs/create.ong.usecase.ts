@@ -1,7 +1,7 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { CreateOngInputDto, MessageErrorDto } from "src/infra/ongs/dto/create-ong.dto";
-import Ong from "src/infra/ongs/entities/ong.entity";
-import { OngRepository } from "src/infra/ongs/ongs.repository";
+import { OngRepository } from "../../infra/ongs/ongs.repository";
+import { CreateOngInputDto, MessageErrorDto } from "../../infra/ongs/dto/create-ong.dto";
+import Ong from "../../infra/ongs/entities/ong.entity";
 
 @Injectable()
 export default class CreateOngUsecase {

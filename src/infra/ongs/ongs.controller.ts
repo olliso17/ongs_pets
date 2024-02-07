@@ -5,22 +5,20 @@ import {
   Body,
   Patch,
   Param,
-  Delete,
-  Inject,
   UseGuards,
   Req,
 } from "@nestjs/common";
-import { CreateOngInputDto } from "./dto/create-ong.dto";
-import CreateOngUsecase from "src/usecases/ongs/create.ong.usecase";
-import FindOngByIdUsecase from "src/usecases/ongs/find.by.ong.id";
-import { UpdateOngInputDto } from "./dto/update-ong.dto";
-import { EditOngUsecase } from "src/usecases/ongs/edit.ong.usecase";
-import ActivateOngUsecase from "src/usecases/ongs/activate.ong.usecase";
-import { FindByIdOngInputDto } from "./dto/active-ong.dto";
-import FindAllActiveOngsUsecase from "src/usecases/ongs/find.all.active.ong.usecase";
-import FindAllOngsUsecase from "src/usecases/ongs/find.all.ong.usecase copy";
-import { AuthGuard, Public } from "../auth/auth.guard";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import CreateOngUsecase from "../../usecases/ongs/create.ong.usecase";
+import FindOngByIdUsecase from "../../usecases/ongs/find.by.ong.id";
+import { EditOngUsecase } from "../../usecases/ongs/edit.ong.usecase";
+import ActivateOngUsecase from "../../usecases/ongs/activate.ong.usecase";
+import FindAllOngsUsecase from "../../usecases/ongs/find.all.ong.usecase copy";
+import FindAllActiveOngsUsecase from "../../usecases/ongs/find.all.active.ong.usecase";
+import { AuthGuard, Public } from "../auth/auth.guard";
+import { CreateOngInputDto } from "./dto/create-ong.dto";
+import { FindByIdOngInputDto } from "./dto/active-ong.dto";
+import { UpdateOngInputDto } from "./dto/update-ong.dto";
 
 @ApiTags('ongs')
 @Controller()

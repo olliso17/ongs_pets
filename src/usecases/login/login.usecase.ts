@@ -1,11 +1,10 @@
 import { Injectable, UnauthorizedException } from "@nestjs/common";
-import { UserRepository } from "src/infra/users/user.repository";
-import { Login } from "src/infra/logins/entities/login.entity";
-import * as bcrypt from "bcryptjs";
-import { v4 as uuidv4 } from "uuid";
-import { LoginInputDto } from "src/infra/logins/dto/login.dto";
-import { LoginRepository } from "src/infra/logins/login.repository";
+import { UserRepository } from "../../infra/users/user.repository";
+import { LoginRepository } from "../../infra/logins/login.repository";
+import { LoginInputDto } from "../../infra/logins/dto/login.dto";
+import { Login } from "../../infra/logins/entities/login.entity";
 
+const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");
 const os = require("os");
 const jwt = require('jsonwebtoken');

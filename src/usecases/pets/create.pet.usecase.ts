@@ -1,8 +1,8 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { MessageErrorDto } from "src/infra/ongs/dto/create-ong.dto";
-import { CreatePetInputDto } from "src/infra/pets/dto/create-pet.dto";
-import { Pet } from "src/infra/pets/entities/pet.entity";
-import { PetRepository } from "src/infra/pets/pets.repository";
+import { PetRepository } from "../../infra/pets/pets.repository";
+import { CreatePetInputDto } from "../../infra/pets/dto/create-pet.dto";
+import { MessageErrorDto } from "../../infra/ongs/dto/create-ong.dto";
+import { Pet } from "../../infra/pets/entities/pet.entity";
 
 @Injectable()
 export default class CreatePetUsecase {

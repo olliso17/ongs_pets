@@ -1,17 +1,17 @@
 import { Module } from "@nestjs/common";
-import { UsersController } from "./users.controller";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import User from "./entities/user.entity";
+import { Login } from "../logins/entities/login.entity";
+import { UsersController } from "./users.controller";
+import ActivateUseUsecase from "../../usecases/users/activate.user.usecase";
+import CreateUseUsecase from "../../usecases/users/create.user.usecase";
+import FindUserByIdUsecase from "../../usecases/users/find.by.user.id";
+import FindAllUsersUsecase from "../../usecases/users/find.all.user.usecase";
 import { UserRepository } from "./user.repository";
-import ActivateUseUsecase from "src/usecases/users/activate.user.usecase";
-import CreateUseUsecase from "src/usecases/users/create.user.usecase";
-import FindUserByIdUsecase from "src/usecases/users/find.by.user.id";
-import FindAllUsersUsecase from "src/usecases/users/find.all.user.usecase";
-import EditPasswordUserUsecase from "src/usecases/users/edit.user.usecase";
-import { Login } from "src/infra/logins/entities/login.entity";
-import { LoginUsecase } from "src/usecases/login/login.usecase";
-import { AuthGuard } from "../auth/auth.guard";
 import { LoginRepository } from "../logins/login.repository";
+import EditPasswordUserUsecase from "../../usecases/users/edit.user.usecase";
+import { LoginUsecase } from "../../usecases/login/login.usecase";
+import { AuthGuard } from "../auth/auth.guard";
 
 @Module({
   imports: [TypeOrmModule.forFeature([User, Login])],

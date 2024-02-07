@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
-import { FindByIdUserInputDto } from "src/infra/users/dto/active-user.dto";
-import { CreateUserOutputDto } from "src/infra/users/dto/create-user.dto";
-import { UserRepository } from "src/infra/users/user.repository";
+import { UserRepository } from "../../infra/users/user.repository";
+import { FindByIdUserInputDto } from "../../infra/users/dto/active-user.dto";
+import { CreateUserOutputDto } from "../../infra/users/dto/create-user.dto";
 
 @Injectable()
 export default class ActivateUseUsecase {
