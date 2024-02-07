@@ -1,19 +1,21 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
+import { LoginRepository } from '../logins/login.repository';
+import { UserRepository } from '../users/user.repository';
+import { LoginUsecase } from '../../usecases/login/login.usecase';
 
 describe('AuthController', () => {
   let controller: AuthController;
+  let loginRepository: LoginRepository;
+  let userRepository: UserRepository;
+  let loginUsecase: LoginUsecase;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [AuthController],
-      providers: [AuthService],
-    }).compile();
-
-    controller = module.get<AuthController>(AuthController);
+  beforeEach(() => {
+    const typeOrmMock: any = {};
+    loginRepository = new LoginRepository(typeOrmMock);
+    userRepository = new UserRepository(typeOrmMock);
+    loginUsecase = new LoginUsecase(userRepository, loginRepository)
+    controller = new AuthController(loginUsecase)
   });
-
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
