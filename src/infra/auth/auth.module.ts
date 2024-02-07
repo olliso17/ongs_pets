@@ -8,6 +8,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Login } from '../logins/entities/login.entity';
 import User from '../users/entities/user.entity';
 import { LoginUsecase } from '../../usecases/login/login.usecase';
+import { LogoutUsecase } from '../../usecases/login/logout.usecase';
 
 @Module({
   imports: [
@@ -22,9 +23,10 @@ import { LoginUsecase } from '../../usecases/login/login.usecase';
   providers: [
     LoginUsecase,
     LoginRepository,
+    LogoutUsecase,
     UserRepository,
     AuthGuard,
- 
+
   ],
 })
 export class AuthModule { }

@@ -8,7 +8,6 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { dataSourceOptions } from "db/data-source";
 import { UsersModule } from "./infra/users/users.module";
 import { AuthModule } from './infra/auth/auth.module';
-import { ValidationModule } from './validation/validation.module';
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -19,8 +18,7 @@ dotenv.config();
     OngsModule,
     PetsModule,
     DonationsModule,
-    AuthModule,
-    ValidationModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
