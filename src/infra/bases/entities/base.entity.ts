@@ -17,4 +17,5 @@ export class Base {
 
   @CreateDateColumn({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP" })
   deleted_at: Date;
+
 }

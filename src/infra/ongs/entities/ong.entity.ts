@@ -21,7 +21,7 @@ type OngProps = {
   number_address?: string;
   cep?: string;
   user_id: string;
-  city?:string;
+  city?: string;
   telephone?: string;
   maximum_pets?: number | 0;
   email_ong?: string;
@@ -59,14 +59,14 @@ export default class Ong extends Base {
   @Column({ type: "varchar", length: 80 })
   cep: string;
 
-  @Column({ type: "varchar" }) 
+  @Column({ type: "varchar" })
   user_id: string;
 
   @ManyToOne(() => User, user => user.ongs)
   @JoinColumn({ name: "user_id" })
   user: User;
 
-  @Column({ type: "varchar", length: 300,  default: "" })
+  @Column({ type: "varchar", length: 300, default: "" })
   telephone: string;
 
   @Column({ type: "integer", default: 0 })
@@ -83,7 +83,9 @@ export default class Ong extends Base {
 
   constructor(props: OngProps) {
     super();
-
+    
     Object.assign(this, props);
+
   }
+
 }
