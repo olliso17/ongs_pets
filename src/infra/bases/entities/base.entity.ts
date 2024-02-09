@@ -1,5 +1,4 @@
-import { randomUUID } from "crypto";
-import { Column, CreateDateColumn, PrimaryGeneratedColumn, Unique } from "typeorm";
+import { Column, CreateDateColumn, PrimaryGeneratedColumn } from "typeorm";
 
 
 export class Base {

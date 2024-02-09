@@ -1,9 +1,6 @@
+import { LoginRepository } from '../../infra/logins/login.repository';
 import { UserRepository } from "../../infra/users/user.repository";
 import CreateUseUsecase from "./create.user.usecase";
-import { LoginRepository } from '../../infra/logins/login.repository';
-import User from "../../infra/users/entities/user.entity";
-import { CreateUserOutputDto } from "../../infra/users/dto/create-user.dto";
-import { randomUUID } from "crypto";
 
 
 describe('CreateUserUsecase', () => {
